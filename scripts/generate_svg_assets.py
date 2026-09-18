@@ -568,6 +568,135 @@ def gen_shakes():
                 garnish_cookie)
 
 
+# ================================================================
+# BOTTLE  — matching the classic glass milk-bottle product shot
+# (240x400 viewBox, portrait)
+# ================================================================
+
+def gen_bottle():
+    w, h = 240, 400
+    defs = (lingrad("bottleGlass", [(0, "#FFFFFF"), (0.5, "#EEF5F8"), (1, "#DCE8EE")], 0, 0, 1, 0.15) +
+            lingrad("bottleFill", [(0, "#FFC9D3"), (0.5, "#F6A0B2"), (1, "#EE87A0")], 0, 0, 0, 1) +
+            lingrad("bottleCap", [(0, "#FF6F87"), (0.5, "#E8536B"), (1, "#B8324A")], 0, 0, 1, 1))
+    svg = svg_open(w, h, defs)
+    cx = w / 2
+    svg += ground_shadow(cx, 382, 78, 12)
+
+    neck_w, shoulder_y, body_w, body_top, body_bottom, body_r = 34, 96, 92, 118, 360, 20
+    bottle_path = (
+        f"M{cx-neck_w/2},48 L{cx+neck_w/2},48 "
+        f"L{cx+neck_w/2},{shoulder_y-18} "
+        f"C{cx+neck_w/2+8},{shoulder_y} {cx+body_w/2},{shoulder_y+10} {cx+body_w/2},{body_top} "
+        f"L{cx+body_w/2},{body_bottom-body_r} "
+        f"Q{cx+body_w/2},{body_bottom} {cx+body_w/2-body_r},{body_bottom} "
+        f"L{cx-body_w/2+body_r},{body_bottom} "
+        f"Q{cx-body_w/2},{body_bottom} {cx-body_w/2},{body_bottom-body_r} "
+        f"L{cx-body_w/2},{body_top} "
+        f"C{cx-body_w/2},{shoulder_y+10} {cx-neck_w/2-8},{shoulder_y} {cx-neck_w/2},{shoulder_y-18} Z"
+    )
+    svg += f'<path d="{bottle_path}" fill="url(#bottleGlass)" opacity="0.5" filter="url(#softShadow)"/>'
+    svg += f'<clipPath id="bottleClip"><path d="{bottle_path}"/></clipPath>'
+    fill_top = body_top + 26
+    fill_path = (f"M{cx-body_w/2},{fill_top} L{cx+body_w/2},{fill_top} L{cx+body_w/2},{body_bottom} "
+                 f"L{cx-body_w/2},{body_bottom} Z")
+    svg += f'<g clip-path="url(#bottleClip)"><path d="{fill_path}" fill="url(#bottleFill)"/>'
+    svg += f'<ellipse cx="{cx}" cy="{fill_top}" rx="{body_w/2}" ry="6" fill="#FFD9E0"/>'
+    svg += f'<ellipse cx="{cx-body_w*0.22:.1f}" cy="{(fill_top+body_bottom)/2}" rx="9" ry="{(body_bottom-fill_top)/2*0.8}" fill="#FFFFFF" opacity="0.18"/></g>'
+    svg += f'<path d="{bottle_path}" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.6"/>'
+
+    # cap
+    svg += f'<rect x="{cx-neck_w/2-2}" y="20" width="{neck_w+4}" height="30" rx="4" fill="url(#bottleCap)" filter="url(#softShadow)"/>'
+    for i in range(4):
+        svg += f'<line x1="{cx-neck_w/2-2}" y1="{28+i*6}" x2="{cx+neck_w/2+2}" y2="{28+i*6}" stroke="#0000001a" stroke-width="1.4"/>'
+    svg += highlight(cx - neck_w * 0.22, 32, 4, 12, 0.4)
+
+    # neck hang-tag with strawberry mark
+    tag_w, tag_h, tag_x, tag_y = 30, 46, cx + neck_w / 2 - 4, 46
+    svg += f'<rect x="{tag_x}" y="{tag_y}" width="{tag_w}" height="{tag_h}" rx="3" fill="url(#bottleCap)" filter="url(#softShadow)"/>'
+    d_sb, body_sb = strawberry_body(tag_x + tag_w / 2, tag_y + 24, 0.26, grad_id="tagSb")
+    svg += f"<defs>{d_sb}</defs>{body_sb}"
+    svg += f'<text x="{tag_x+tag_w/2}" y="{tag_y+12}" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="#FFFFFF" text-anchor="middle">100%</text>'
+
+    # label band
+    label_y, label_h = 232, 92
+    svg += (f'<rect x="{cx-body_w/2+2}" y="{label_y}" width="{body_w-4}" height="{label_h}" '
+            f'fill="url(#bottleCap)" filter="url(#softShadow)"/>')
+    svg += f'<circle cx="{cx+body_w*0.28:.1f}" cy="{label_y+label_h*0.3:.1f}" r="{body_w*0.6:.1f}" fill="#FFFFFF" opacity="0.08"/>'
+    svg += (f'<text x="{cx}" y="{label_y+34}" font-family="Georgia,serif" font-weight="700" font-size="19" '
+            f'fill="#FFFFFF" text-anchor="middle">STRAWBERRY</text>')
+    svg += (f'<text x="{cx}" y="{label_y+58}" font-family="Georgia,serif" font-weight="700" font-size="19" '
+            f'fill="#FFFFFF" text-anchor="middle">MILKSHAKE</text>')
+    svg += (f'<text x="{cx}" y="{label_y+78}" font-family="Arial,sans-serif" font-weight="600" font-size="10" '
+            f'letter-spacing="2" fill="#FFFFFF" opacity="0.85" text-anchor="middle">SHAKE FACTORY</text>')
+
+    # condensation
+    for (dx, dy, r) in [(-26, 30, 3.2), (22, 60, 2.6), (-16, 90, 2.4), (28, 20, 2.8), (-6, 130, 2.2)]:
+        svg += f'<circle cx="{cx+dx}" cy="{fill_top+dy}" r="{r}" fill="#FFFFFF" opacity="0.55"/>'
+    svg += svg_close()
+    write("bottle.svg", svg)
+
+
+# ================================================================
+# SPLASH RING  — the two-tone (fruit / cream) pour ring transition
+# (300x320 viewBox)
+# ================================================================
+
+def _ribbon_path(cx, cy, R, theta_start, theta_end, n=36, seed=0):
+    outer, inner = [], []
+    for i in range(n + 1):
+        t = theta_start + (theta_end - theta_start) * i / n
+        rad = math.radians(t)
+        frac = i / n
+        wob = 1 + 0.05 * math.sin(frac * 9 + seed) + 0.03 * math.sin(frac * 17 + seed * 2)
+        width = 16 + 26 * math.sin(math.pi * frac) ** 0.7
+        ro = R * wob + width / 2
+        ri = R * wob - width / 2
+        outer.append((cx + ro * math.sin(rad), cy - ro * math.cos(rad)))
+        inner.append((cx + ri * math.sin(rad), cy - ri * math.cos(rad)))
+    pts = outer + inner[::-1]
+    return "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts) + " Z", outer
+
+
+def gen_splash_ring():
+    w, h = 300, 320
+    cx, cy, R = 150, 168, 108
+    defs = (lingrad("ringRed", [(0, "#FF8FA3"), (0.5, "#E8536B"), (1, "#A32B42")], 0, 0, 1, 1) +
+            lingrad("ringCream", [(0, "#FFFFFF"), (0.5, "#F7F1E6"), (1, "#E3D6BE")], 0, 0, 1, 1))
+    svg = svg_open(w, h, defs)
+
+    left_path, left_pts = _ribbon_path(cx, cy, R, -18, -182, seed=1)
+    right_path, right_pts = _ribbon_path(cx, cy, R, 18, 182, seed=4)
+
+    # Kept deliberately light on shape count: an SVG group filter
+    # (feDropShadow) forces the browser to rasterize+blur everything
+    # inside it, so a big group full of dozens of small shapes is
+    # expensive to paint on first render, especially stacked alongside
+    # the many other filtered elements in the hero. A plain CSS
+    # drop-shadow on the <img> itself (see .hero__splash) gives the
+    # same grounding shadow far more cheaply, so no SVG-level filter
+    # is used here at all.
+    g = "<g>"
+    g += f'<path d="{left_path}" fill="url(#ringRed)"/>'
+    g += f'<path d="{right_path}" fill="url(#ringCream)"/>'
+    # a handful of foam/splatter blobs along each ribbon's outer edge
+    for (pts, fill) in ((left_pts, "#F0637A"), (right_pts, "#FFFFFF")):
+        for i in range(4, len(pts) - 4, 7):
+            x, y = pts[i]
+            r = random.uniform(3, 6)
+            g += f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" fill="{fill}" opacity="0.7"/>'
+    g += "</g>"
+    svg += g
+
+    # two strawberries falling into the top gap
+    d1, b1 = strawberry_body(cx - 22, 26, 0.42, grad_id="ringSb1")
+    d2, b2 = strawberry_body(cx + 20, 44, 0.36, grad_id="ringSb2")
+    svg = svg.replace("<defs>", f"<defs>{d1}{d2}", 1)
+    svg += b1 + b2
+    svg += highlight(cx - R * 0.5, cy - R * 0.6, 20, 30, 0.25, rotate=-20)
+    svg += svg_close()
+    write("splash-ring.svg", svg)
+
+
 if __name__ == "__main__":
     gen_strawberry()
     gen_banana()
@@ -583,4 +712,6 @@ if __name__ == "__main__":
     gen_whipped_cream()
     gen_ice_cubes()
     gen_shakes()
+    gen_bottle()
+    gen_splash_ring()
     print("done")

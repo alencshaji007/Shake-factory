@@ -1,6 +1,6 @@
 /* =========================================================
    SHAKE FACTORY — cinematic scroll experience
-   Real photographic layers, animated with GSAP + Lenis.
+   Layered SVG illustrations, animated with GSAP + Lenis.
    ========================================================= */
 (function () {
   "use strict";
@@ -8,6 +8,15 @@
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   gsap.registerPlugin(ScrollTrigger);
+
+  // Guard every timeline on the page against a stalled first paint (a lot
+  // of SVG gradients/filters decoding at once can block the main thread
+  // for a beat). Without this, a long stall makes GSAP's ticker see a huge
+  // time delta on its next tick and jump active timelines straight to
+  // wherever "real time" says they should be — fast-forwarding the whole
+  // hero intro to its end instead of playing it. Clamping any gap over
+  // 500ms down to a small step keeps animations correct regardless.
+  gsap.ticker.lagSmoothing(500, 33);
 
   /* ---------------- Lenis smooth scroll ---------------- */
   var lenis = null;
@@ -19,7 +28,6 @@
     });
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
-    gsap.ticker.lagSmoothing(0);
   }
 
   /* ---------------- Preloader ---------------- */
@@ -73,81 +81,127 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* =========================================================
-     HERO — opening cinematic sequence
-     Real ingredient photographs fly in, converge, then reveal
-     the real milkshake product photograph + title.
-     ========================================================= */
-  function playHeroIntro() {
-    var stage = document.querySelector("[data-hero-stage]");
-    if (!stage) return;
+     HERO — opening cinematic sequence, in three beats:
+     1. strawberries tumble through frame
+     2. they pour into a fruit-and-cream splash ring
+     3. the ring resolves into the bottle + glass product shot
 
-    var items = gsap.utils.toArray("[data-hero-item]");
-    var shake = document.querySelector("[data-hero-shake]");
-    var shadow = document.querySelector("[data-hero-shake-shadow]");
-    var titleLines = gsap.utils.toArray(".hero__title-line");
-    var eyebrow = document.querySelector("[data-hero-eyebrow]");
-    var sub = document.querySelector("[data-hero-sub]");
-    var scrollcue = document.querySelector("[data-hero-scrollcue]");
+     Initial hidden states are applied immediately (synchronously, before
+     the preloader even starts fading) so there's never a frame where the
+     title/eyebrow flash fully visible underneath the preloader before
+     snapping to hidden — only playHeroIntro() (run after the preloader
+     fades) is timing-dependent; the hidden states themselves aren't.
+     ========================================================= */
+  var heroEls = {
+    tumbleItems: gsap.utils.toArray("[data-tumble-item]"),
+    splash: document.querySelector("[data-hero-splash]"),
+    bottle: document.querySelector("[data-hero-bottle]"),
+    glass: document.querySelector("[data-hero-glass]"),
+    floor: document.querySelector("[data-hero-floor]"),
+    scatter: gsap.utils.toArray("[data-hero-scatter]"),
+    titleLines: gsap.utils.toArray(".hero__title-line-inner"),
+    eyebrow: document.querySelector("[data-hero-eyebrow]"),
+    sub: document.querySelector("[data-hero-sub]"),
+    scrollcue: document.querySelector("[data-hero-scrollcue]"),
+  };
+
+  (function setHeroInitialStates() {
+    if (!document.querySelector("[data-hero-stage]")) return;
+    var h = heroEls;
 
     if (reduceMotion) {
-      gsap.set(items, { opacity: 1 });
-      gsap.set(shake, { opacity: 1, scale: 1, y: 0 });
-      gsap.set(shadow, { opacity: 1 });
-      gsap.set([eyebrow, sub, scrollcue], { opacity: 1, y: 0 });
+      gsap.set(h.tumbleItems, { opacity: 0 });
+      gsap.set(h.splash, { opacity: 0 });
+      gsap.set([h.bottle, h.glass, h.floor].concat(h.scatter), { opacity: 1, scale: 1, x: 0 });
+      gsap.set([h.eyebrow, h.sub, h.scrollcue], { opacity: 1, y: 0 });
       return;
     }
 
-    // randomize entry direction per item for a natural, non-mechanical feel
-    items.forEach(function (el) {
-      var fromX = gsap.utils.random(-160, 160);
-      var fromY = gsap.utils.random(-120, -40);
-      el.dataset.fromX = fromX;
-      el.dataset.fromY = fromY;
+    // each strawberry tumbles in from a random point above the frame
+    h.tumbleItems.forEach(function (el) {
+      el.dataset.fromX = gsap.utils.random(-120, 120);
+      el.dataset.fromY = gsap.utils.random(-220, -100);
+      el.dataset.fromRot = gsap.utils.random(-160, 160);
     });
 
-    gsap.set(items, {
+    gsap.set(h.tumbleItems, {
       opacity: 0,
-      scale: 0.4,
-      rotate: function () { return gsap.utils.random(-45, 45); },
+      scale: 0.5,
       x: function (i, el) { return parseFloat(el.dataset.fromX); },
       y: function (i, el) { return parseFloat(el.dataset.fromY); },
-      filter: "blur(6px)",
+      rotate: function (i, el) { return parseFloat(el.dataset.fromRot); },
+      filter: "blur(5px)",
     });
-    gsap.set(shake, { opacity: 0, scale: 0.7, y: 50 });
-    gsap.set(shadow, { opacity: 0, scaleX: 0.6 });
-    gsap.set(eyebrow, { opacity: 0, y: 14 });
-    gsap.set(titleLines, { yPercent: 130 });
-    gsap.set(sub, { opacity: 0, y: 16 });
-    gsap.set(scrollcue, { opacity: 0 });
+    gsap.set(h.splash, { opacity: 0, scale: 0.5, rotate: -12 });
+    gsap.set(h.floor, { opacity: 0, scaleX: 0 });
+    gsap.set(h.bottle, { opacity: 0, scale: 0.6, y: 40 });
+    gsap.set(h.glass, { opacity: 0, scale: 0.6, y: 40 });
+    gsap.set(h.scatter, { opacity: 0, scale: 0.4, y: 16 });
+    gsap.set(h.eyebrow, { opacity: 0, y: 14 });
+    gsap.set(h.titleLines, { yPercent: 130 });
+    gsap.set(h.sub, { opacity: 0, y: 16 });
+    gsap.set(h.scrollcue, { opacity: 0 });
+  })();
+
+  function playHeroIntro() {
+    if (!document.querySelector("[data-hero-stage]")) return;
+    if (reduceMotion) return;
+
+    var tumbleItems = heroEls.tumbleItems;
+    var splash = heroEls.splash;
+    var bottle = heroEls.bottle;
+    var glass = heroEls.glass;
+    var floor = heroEls.floor;
+    var scatter = heroEls.scatter;
+    var titleLines = heroEls.titleLines;
+    var eyebrow = heroEls.eyebrow;
+    var sub = heroEls.sub;
+    var scrollcue = heroEls.scrollcue;
 
     var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    tl.to(items, {
+    // beat 1 — tumble
+    tl.to(tumbleItems, {
       opacity: 1,
       scale: 1,
-      rotate: 0,
       x: 0,
       y: 0,
+      rotate: function () { return gsap.utils.random(-20, 20); },
       filter: "blur(0px)",
-      duration: 1.1,
-      stagger: { each: 0.09, from: "random" },
-    }, 0.15)
-      .to(items, {
-        y: "-=18",
-        duration: 1.6,
+      duration: 1,
+      stagger: { each: 0.07, from: "random" },
+    }, 0.1)
+      .to(tumbleItems, {
+        y: "+=26",
+        rotate: "+=14",
+        duration: 1.1,
         ease: "sine.inOut",
-        stagger: { each: 0.05, from: "random" },
-      }, "-=0.4")
-      .to(shadow, { opacity: 1, scaleX: 1, duration: 0.5 }, "-=1.2")
-      .to(shake, { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power3.out" }, "-=1.1")
-      .to(items, { opacity: 0.16, scale: 0.85, filter: "blur(2px)", duration: 0.8 }, "-=0.7")
-      .to(eyebrow, { opacity: 1, y: 0, duration: 0.6 }, "-=0.5")
-      .to(titleLines, { yPercent: 0, duration: 0.9, stagger: 0.08, ease: "power4.out" }, "-=0.45")
-      .to(sub, { opacity: 1, y: 0, duration: 0.7 }, "-=0.5")
+        stagger: { each: 0.04, from: "random" },
+      }, "-=0.3")
+      // beat 2 — pour into the splash ring
+      .to(tumbleItems, {
+        opacity: 0,
+        scale: 0.6,
+        y: "+=30",
+        filter: "blur(4px)",
+        duration: 0.5,
+        stagger: { each: 0.02, from: "center" },
+      }, "-=0.55")
+      .to(splash, { opacity: 1, scale: 1, rotate: 0, duration: 0.7, ease: "back.out(1.4)" }, "-=0.5")
+      .to(splash, { rotate: 10, duration: 0.6, ease: "sine.inOut" }, "-=0.1")
+      // beat 3 — resolve into the product shot
+      .to(splash, { opacity: 0, scale: 1.3, duration: 0.5, ease: "power2.in" }, "+=0.05")
+      .to(floor, { opacity: 1, scaleX: 1, duration: 0.6, ease: "power2.out" }, "-=0.4")
+      .to(bottle, { opacity: 1, scale: 1, y: 0, duration: 0.8 }, "-=0.45")
+      .to(glass, { opacity: 1, scale: 1, y: 0, duration: 0.8 }, "-=0.62")
+      .to(scatter, { opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.08 }, "-=0.5")
+      .to(eyebrow, { opacity: 1, y: 0, duration: 0.6 }, "-=0.55")
+      .to(titleLines, { yPercent: 0, duration: 0.9, stagger: 0.08, ease: "power4.out" }, "-=0.5")
+      .to(sub, { opacity: 1, y: 0, duration: 0.7 }, "-=0.55")
       .to(scrollcue, { opacity: 1, duration: 0.6 }, "-=0.3");
 
-    /* Scroll-out: as the user leaves the hero, push the whole stage
-       away with parallax + blur so it reads like a camera pull-back. */
+    /* Scroll-out: as the user leaves the hero, push the product away
+       with parallax + blur so it reads like a camera pull-back. */
     gsap.timeline({
       scrollTrigger: {
         trigger: ".hero",
@@ -156,12 +210,9 @@
         scrub: 0.6,
       },
     })
-      .to(shake, { scale: 1.25, y: -60, opacity: 0, filter: "blur(6px)", ease: "none" }, 0)
-      .to(items, {
-        y: function (i) { return -140 - i * 20; },
-        opacity: 0,
-        ease: "none",
-      }, 0)
+      .to([bottle, glass], { scale: 1.2, y: -50, opacity: 0, filter: "blur(6px)", ease: "none" }, 0)
+      .to(scatter, { y: -80, opacity: 0, ease: "none" }, 0)
+      .to(floor, { opacity: 0, ease: "none" }, 0)
       .to(".hero__copy", { y: -80, opacity: 0, ease: "none" }, 0)
       .to(".hero__bg", { scale: 1.2, ease: "none" }, 0)
       .to(scrollcue, { opacity: 0, ease: "none" }, 0);

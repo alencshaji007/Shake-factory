@@ -45,28 +45,37 @@
     <div class="hero__grain"></div>
 
     <div class="hero__stage" data-hero-stage>
-      <!-- Ingredient illustrations (swap these SVG files) travel through the opening sequence -->
-      <img data-hero-item="strawberry" class="hero__item hero__item--strawberry" src="assets/images/strawberry.svg" alt="Strawberry" />
-      <img data-hero-item="banana" class="hero__item hero__item--banana" src="assets/images/banana.svg" alt="Banana" />
-      <img data-hero-item="mango" class="hero__item hero__item--mango" src="assets/images/mango.svg" alt="Mango" />
-      <img data-hero-item="almonds" class="hero__item hero__item--almonds" src="assets/images/almonds.svg" alt="Almonds" />
-      <img data-hero-item="cashews" class="hero__item hero__item--cashews" src="assets/images/cashews.svg" alt="Cashews" />
-      <img data-hero-item="pistachios" class="hero__item hero__item--pistachios" src="assets/images/pistachios.svg" alt="Pistachios" />
-      <img data-hero-item="chocolate" class="hero__item hero__item--chocolate" src="assets/images/chocolate.svg" alt="Chocolate pieces" />
-      <img data-hero-item="ice" class="hero__item hero__item--ice" src="assets/images/ice-cubes.svg" alt="Ice cubes" />
-      <img data-hero-item="milk" class="hero__item hero__item--milk" src="assets/images/milk-splash.svg" alt="Milk splash" />
+      <!-- Phase 1: strawberries tumble through frame -->
+      <div class="hero__tumble" data-hero-tumble>
+        <img class="hero__tumble-item hero__tumble-item--1" data-tumble-item src="assets/images/strawberry.svg" alt="Strawberry" />
+        <img class="hero__tumble-item hero__tumble-item--2" data-tumble-item src="assets/images/strawberry.svg" alt="Strawberry" />
+        <img class="hero__tumble-item hero__tumble-item--3" data-tumble-item src="assets/images/strawberry.svg" alt="Strawberry" />
+        <img class="hero__tumble-item hero__tumble-item--4" data-tumble-item src="assets/images/strawberry.svg" alt="Strawberry" />
+        <img class="hero__tumble-item hero__tumble-item--5" data-tumble-item src="assets/images/strawberry.svg" alt="Strawberry" />
+        <img class="hero__tumble-item hero__tumble-item--6" data-tumble-item src="assets/images/strawberry.svg" alt="Strawberry" />
+        <img class="hero__tumble-item hero__tumble-item--7" data-tumble-item src="assets/images/strawberry.svg" alt="Strawberry" />
+        <img class="hero__tumble-item hero__tumble-item--8" data-tumble-item src="assets/images/strawberry.svg" alt="Strawberry" />
+      </div>
 
-      <div class="hero__shake-wrap" data-hero-shake-wrap>
-        <img data-hero-shake class="hero__shake" src="assets/images/shake-strawberry.svg" alt="Shake Factory Strawberry Cloud milkshake illustration" />
-        <div class="hero__shake-shadow" data-hero-shake-shadow></div>
+      <!-- Phase 2: fruit-and-cream splash ring, the pour transition -->
+      <img class="hero__splash" data-hero-splash src="assets/images/splash-ring.svg" alt="" />
+
+      <!-- Phase 3: product reveal — bottle + glass on a glossy floor -->
+      <div class="hero__product" data-hero-product>
+        <div class="hero__floor" data-hero-floor></div>
+        <img class="hero__bottle" data-hero-bottle src="assets/images/bottle.svg" alt="Shake Factory strawberry milkshake bottle illustration" />
+        <img class="hero__glass" data-hero-glass src="assets/images/shake-strawberry.svg" alt="Shake Factory strawberry milkshake glass illustration" />
+        <img class="hero__scatter hero__scatter--1" data-hero-scatter src="assets/images/strawberry.svg" alt="" />
+        <img class="hero__scatter hero__scatter--2" data-hero-scatter src="assets/images/strawberry.svg" alt="" />
+        <img class="hero__scatter hero__scatter--3" data-hero-scatter src="assets/images/strawberry.svg" alt="" />
       </div>
     </div>
 
     <div class="hero__copy">
       <p class="eyebrow" data-hero-eyebrow>Small batch &middot; Real ingredients &middot; No shortcuts</p>
       <h1 class="hero__title" data-hero-title>
-        <span class="hero__title-line">Shake</span>
-        <span class="hero__title-line hero__title-line--accent">Factory</span>
+        <span class="hero__title-line"><span class="hero__title-line-inner">Shake</span></span>
+        <span class="hero__title-line hero__title-line--accent"><span class="hero__title-line-inner">Factory</span></span>
       </h1>
       <p class="hero__sub" data-hero-sub>Real fruit. Real nuts. Real chocolate. Blended into the thickest shake you'll have this year.</p>
     </div>

@@ -42,8 +42,9 @@ without touching the CSS or JS:
 **Ingredient icons** — `strawberry.svg`, `banana.svg`, `mango.svg`,
 `blueberries.svg`, `almonds.svg`, `cashews.svg`, `pistachios.svg`,
 `hazelnuts.svg`, `chocolate.svg`, `cookie.svg`, `milk-splash.svg`,
-`whipped-cream.svg`, `ice-cubes.svg` — used in the hero opening sequence,
-the scroll-pinned ingredient depth scene, and the "Our Craft" section.
+`whipped-cream.svg`, `ice-cubes.svg` — the scroll-pinned ingredient depth
+scene and the "Our Craft" section use these; `strawberry.svg` alone also
+drives the hero's tumble/scatter phases.
 
 **Product illustrations** — `shake-strawberry.svg`, `shake-chocolate.svg`,
 `shake-mango.svg`, `shake-pistachio.svg`, `shake-caramel.svg`,
@@ -52,6 +53,13 @@ flavour-matched fill gradient, whipped cream, straw, and a distinct
 garnish (fresh strawberry, chocolate shavings, mango wedge, crushed
 pistachio, caramel drizzle + nuts, or cookie crumble) so the six shakes
 read as six different products, not one glass recolored six times.
+
+**Hero-only assets** — `bottle.svg` (a labeled glass milk-bottle, used
+alongside `shake-strawberry.svg`'s glass in the hero's product reveal)
+and `splash-ring.svg` (the two-tone fruit/cream pour-ring transition
+between the tumble and product-reveal phases). Both were designed to
+match the composition of a reference product-ad video the user supplied
+for this project.
 
 ## Regenerating or editing the illustrations
 

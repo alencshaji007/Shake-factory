@@ -153,21 +153,21 @@ section{ position:relative; }
   position:relative;
   height:100svh; min-height:640px;
   overflow:hidden;
-  background:var(--chocolate);
+  background:#3D0D14;
 }
 .hero__bg{
   position:absolute; inset:0;
   background:
-    radial-gradient(60% 50% at 50% 28%, rgba(255,177,0,0.16) 0%, rgba(255,177,0,0) 70%),
-    radial-gradient(90% 70% at 20% 90%, rgba(232,83,107,0.14) 0%, rgba(232,83,107,0) 65%),
-    linear-gradient(160deg, #4A2E1A 0%, #3B2417 45%, #241209 100%);
+    radial-gradient(55% 48% at 50% 34%, rgba(232,111,127,0.40) 0%, rgba(178,52,74,0.16) 48%, rgba(61,13,20,0) 78%),
+    radial-gradient(90% 70% at 50% 100%, rgba(16,3,6,0.65) 0%, rgba(16,3,6,0) 60%),
+    linear-gradient(160deg, #6B1A26 0%, #4A1019 50%, #2A0810 100%);
   transform:scale(1.08);
 }
 .hero__vignette{
   position:absolute; inset:0;
   background:
-    radial-gradient(120% 90% at 50% 60%, rgba(59,36,23,0) 0%, rgba(36,18,9,.55) 68%, rgba(20,10,5,.92) 100%),
-    linear-gradient(180deg, rgba(20,10,5,.55) 0%, rgba(20,10,5,0) 22%, rgba(20,10,5,0) 70%, rgba(20,10,5,.75) 100%);
+    radial-gradient(120% 90% at 50% 55%, rgba(61,13,20,0) 0%, rgba(30,7,11,.5) 68%, rgba(16,3,6,.92) 100%),
+    linear-gradient(180deg, rgba(16,3,6,.5) 0%, rgba(16,3,6,0) 22%, rgba(16,3,6,0) 70%, rgba(16,3,6,.7) 100%);
 }
 .hero__grain{
   position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
@@ -178,45 +178,77 @@ section{ position:relative; }
   position:absolute; inset:0;
   perspective:1400px;
 }
-.hero__item{
+/* ---- Phase 1: tumbling strawberries ---- */
+.hero__tumble{ position:absolute; inset:0; }
+.hero__tumble-item{
   position:absolute;
-  width:14vw; max-width:180px; min-width:70px;
+  width:11vw; max-width:140px; min-width:56px;
   opacity:0;
-  filter:drop-shadow(0 30px 40px rgba(0,0,0,.45));
-  will-change:transform,opacity,filter;
-}
-.hero__item--strawberry{ top:16%; left:50%; width:17vw; max-width:220px; margin-left:-8.5vw; z-index:9; }
-.hero__item--banana{ top:22%; left:18%; z-index:6; }
-.hero__item--mango{ top:20%; left:76%; z-index:6; }
-.hero__item--almonds{ top:58%; left:12%; width:9vw; max-width:110px; z-index:5; }
-.hero__item--cashews{ top:62%; left:82%; width:9vw; max-width:110px; z-index:5; }
-.hero__item--pistachios{ top:38%; left:6%; width:8vw; max-width:100px; z-index:4; }
-.hero__item--chocolate{ top:40%; left:88%; width:9vw; max-width:120px; z-index:4; }
-.hero__item--ice{ top:70%; left:4%; width:8vw; max-width:100px; z-index:3; }
-.hero__item--milk{ top:70%; left:84%; width:9vw; max-width:120px; z-index:3; }
-
-.hero__shake-wrap{
-  position:absolute;
-  top:24%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  z-index:10;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-.hero__shake{
-  width:min(20vw, 250px);
-  opacity:0;
-  filter:drop-shadow(0 50px 60px rgba(0,0,0,.55));
+  /* no CSS drop-shadow here — strawberry.svg already bakes its own
+     shadow in via an internal filter; stacking a second CSS-level
+     drop-shadow on 8 of these at once is needlessly expensive to paint */
   will-change:transform,opacity;
 }
-.hero__shake-shadow{
-  margin-top:-10px;
-  width:min(18vw,220px); height:32px;
-  background:radial-gradient(closest-side, rgba(0,0,0,.55), rgba(0,0,0,0) 72%);
+.hero__tumble-item--1{ top:4%;  left:12%; width:13vw; max-width:170px; z-index:6; }
+.hero__tumble-item--2{ top:2%;  left:46%; width:9vw;  max-width:110px; z-index:4; }
+.hero__tumble-item--3{ top:8%;  left:74%; width:14vw; max-width:180px; z-index:7; }
+.hero__tumble-item--4{ top:20%; left:28%; width:8vw;  max-width:100px; z-index:3; }
+.hero__tumble-item--5{ top:16%; left:60%; width:7vw;  max-width:90px;  z-index:3; }
+.hero__tumble-item--6{ top:30%; left:6%;  width:10vw; max-width:130px; z-index:5; }
+.hero__tumble-item--7{ top:32%; left:86%; width:9vw;  max-width:120px; z-index:5; }
+.hero__tumble-item--8{ top:12%; left:92%; width:8vw;  max-width:100px; z-index:2; }
+
+/* ---- Phase 2: splash ring pour transition ---- */
+.hero__splash{
+  position:absolute; z-index:8;
+  top:26%; left:50%;
+  width:min(34vw, 400px);
+  transform:translate(-50%,-50%) scale(.6);
+  opacity:0;
+  /* splash-ring.svg has no internal shadow filter (it's a big, many-
+     shape group and an SVG feDropShadow over that is expensive to
+     rasterize) — this single cheap CSS drop-shadow stands in for it */
+  filter:drop-shadow(0 20px 26px rgba(0,0,0,.4));
+  will-change:transform,opacity;
+}
+
+/* ---- Phase 3: product reveal — bottle + glass on a glossy floor ---- */
+.hero__product{
+  position:absolute; z-index:10;
+  top:25%; left:50%;
+  width:min(46vw, 520px);
+  height:min(34vh, 300px);
+  transform:translate(-50%,-50%);
+}
+.hero__floor{
+  position:absolute; left:50%; bottom:2%;
+  width:90%; height:28px;
+  transform:translateX(-50%) scaleX(0);
+  background:radial-gradient(closest-side, rgba(255,180,190,.35), rgba(255,180,190,0) 75%);
   opacity:0;
 }
+.hero__bottle{
+  position:absolute; left:32%; bottom:4%;
+  width:38%;
+  transform:translate(-50%,0) scale(.7);
+  opacity:0;
+  will-change:transform,opacity;
+}
+.hero__glass{
+  position:absolute; left:68%; bottom:4%;
+  width:42%;
+  transform:translate(-50%,0) scale(.7);
+  opacity:0;
+  will-change:transform,opacity;
+}
+.hero__scatter{
+  position:absolute; bottom:2%;
+  width:11%;
+  opacity:0;
+}
+.hero__scatter--1{ left:10%; width:9%; }
+.hero__scatter--2{ left:50%; width:8%; transform:translateX(-50%) rotate(-8deg); }
+.hero__scatter--3{ left:90%; width:10%; }
 
 .hero__copy{
   position:absolute; z-index:12;
@@ -235,6 +267,7 @@ section{ position:relative; }
   display:block;
   overflow:hidden;
 }
+.hero__title-line-inner{ display:block; }
 .hero__title-line--accent{ color:var(--strawberry); }
 .hero__sub{
   margin:1.3rem auto 0;
