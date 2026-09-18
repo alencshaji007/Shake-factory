@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Shake Factory — Real Fruit. Real Cream. Real Shakes.</title>
+<meta name="description" content="Shake Factory — small-batch milkshakes built from real fruit, real nuts, real chocolate and real cream. A cinematic look at how a shake is made." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%233B2417'/%3E%3Ctext x='50' y='66' font-family='Georgia,serif' font-size='58' font-weight='700' fill='%23E8536B' text-anchor='middle'%3ESF%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ============ PRELOADER ============ -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader__mark">SHAKE&nbsp;FACTORY</div>
+  <div class="preloader__bar"><span></span></div>
+</div>
+
+<div id="app">
+
+  <!-- ============ NAV ============ -->
+  <header class="site-nav" data-nav>
+    <a href="#hero" class="site-nav__logo">Shake<span>Factory</span></a>
+    <nav class="site-nav__links">
+      <a href="#ingredients">Ingredients</a>
+      <a href="#signature">Signature</a>
+      <a href="#menu">Menu</a>
+      <a href="#about">Our Craft</a>
+    </nav>
+    <a href="#menu" class="btn btn--pill site-nav__cta">Order a Shake</a>
+    <button class="site-nav__burger" data-burger aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ============ HERO / OPENING SCENE ============ -->
+  <section class="hero" id="hero">
+    <div class="hero__bg" style="background-image:url('assets/images/bg-hero.jpg')"></div>
+    <div class="hero__vignette"></div>
+    <div class="hero__grain"></div>
+
+    <div class="hero__stage" data-hero-stage>
+      <!-- Real ingredient photographs (swap these files) travel through the opening sequence -->
+      <img data-hero-item="strawberry" class="hero__item hero__item--strawberry" src="assets/images/strawberry.png" alt="Real strawberry" />
+      <img data-hero-item="banana" class="hero__item hero__item--banana" src="assets/images/banana.png" alt="Real banana" />
+      <img data-hero-item="mango" class="hero__item hero__item--mango" src="assets/images/mango.png" alt="Real mango" />
+      <img data-hero-item="almonds" class="hero__item hero__item--almonds" src="assets/images/almonds.png" alt="Real almonds" />
+      <img data-hero-item="cashews" class="hero__item hero__item--cashews" src="assets/images/cashews.png" alt="Real cashews" />
+      <img data-hero-item="pistachios" class="hero__item hero__item--pistachios" src="assets/images/pistachios.png" alt="Real pistachios" />
+      <img data-hero-item="chocolate" class="hero__item hero__item--chocolate" src="assets/images/chocolate.png" alt="Real chocolate pieces" />
+      <img data-hero-item="ice" class="hero__item hero__item--ice" src="assets/images/ice-cubes.png" alt="Real ice cubes" />
+      <img data-hero-item="milk" class="hero__item hero__item--milk" src="assets/images/milk-splash.png" alt="Real milk splash" />
+
+      <div class="hero__shake-wrap" data-hero-shake-wrap>
+        <img data-hero-shake class="hero__shake" src="assets/images/shake-strawberry.png" alt="Real Shake Factory strawberry milkshake, photographed in studio" />
+        <div class="hero__shake-shadow" data-hero-shake-shadow></div>
+      </div>
+    </div>
+
+    <div class="hero__copy">
+      <p class="eyebrow" data-hero-eyebrow>Small batch &middot; Real ingredients &middot; No shortcuts</p>
+      <h1 class="hero__title" data-hero-title>
+        <span class="hero__title-line">Shake</span>
+        <span class="hero__title-line hero__title-line--accent">Factory</span>
+      </h1>
+      <p class="hero__sub" data-hero-sub>Real fruit. Real nuts. Real chocolate. Blended into the thickest shake you'll have this year.</p>
+    </div>
+
+    <div class="hero__scrollcue" data-hero-scrollcue>
+      <span>Scroll</span>
+      <i></i>
+    </div>
+  </section>
+
+  <!-- ============ INGREDIENT DEPTH SCENE ============ -->
+  <section class="ingredients" id="ingredients">
+    <div class="ingredients__pin" data-ingredients-pin>
+
+      <div class="depth-layer depth-layer--back" data-depth="0.2">
+        <img src="assets/images/hazelnuts.png" alt="Real hazelnuts" class="depth-img depth-img--hazelnuts" />
+        <img src="assets/images/blueberries.png" alt="Real blueberries" class="depth-img depth-img--blueberries" />
+      </div>
+
+      <div class="depth-layer depth-layer--mid" data-depth="0.55">
+        <img src="assets/images/banana.png" alt="Real banana" class="depth-img depth-img--banana" />
+        <img src="assets/images/mango.png" alt="Real mango" class="depth-img depth-img--mango" />
+        <img src="assets/images/cashews.png" alt="Real cashews" class="depth-img depth-img--cashews" />
+      </div>
+
+      <div class="ingredients__copy">
+        <span class="eyebrow">Ingredients, not additives</span>
+        <h2>We start with the real thing.</h2>
+        <p>No syrups pretending to be fruit. No flavour dust pretending to be chocolate. Every shake begins with whole strawberries, ripe mango, real cream and nuts we crack ourselves.</p>
+      </div>
+
+      <div class="depth-layer depth-layer--front" data-depth="0.9">
+        <img src="assets/images/strawberry.png" alt="Real strawberry" class="depth-img depth-img--strawberry" />
+        <img src="assets/images/pistachios.png" alt="Real pistachios" class="depth-img depth-img--pistachios" />
+        <img src="assets/images/chocolate.png" alt="Real chocolate pieces" class="depth-img depth-img--chocolate" />
+        <img src="assets/images/whipped-cream.png" alt="Real whipped cream" class="depth-img depth-img--cream" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SIGNATURE PRODUCT REVEAL ============ -->
+  <section class="signature" id="signature">
+    <div class="signature__bg" style="background-image:url('assets/images/bg-texture-marble.jpg')"></div>
+    <div class="signature__inner">
+      <div class="signature__copy">
+        <span class="eyebrow">The signature</span>
+        <h2>Strawberry Cloud.<br />Our house favourite.</h2>
+        <p>Whole strawberries blended thick, layered with real whipped cream, finished with a fresh strawberry and a drizzle of cream. Photographed exactly as it's served.</p>
+        <a href="#menu" class="btn btn--dark">See the full menu</a>
+      </div>
+      <div class="signature__product" data-signature-product>
+        <img src="assets/images/shake-strawberry.png" alt="Real photograph of the Shake Factory Strawberry Cloud milkshake" data-signature-img />
+        <div class="signature__floaters">
+          <img src="assets/images/strawberry.png" alt="" class="floater floater--sb-1" />
+          <img src="assets/images/strawberry.png" alt="" class="floater floater--sb-2" />
+          <img src="assets/images/whipped-cream.png" alt="" class="floater floater--cream" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCT COLLECTION ============ -->
+  <section class="collection" id="menu">
+    <div class="collection__head">
+      <span class="eyebrow">The collection</span>
+      <h2>Six shakes. Six real photographs.</h2>
+      <p>Every flavour is shot on its own — no recolouring one render six times.</p>
+    </div>
+
+    <div class="collection__grid">
+
+      <article class="shake-card" data-tilt-card>
+        <div class="shake-card__media">
+          <img src="assets/images/shake-chocolate.png" alt="Real photograph of Choco Overload milkshake" data-tilt-img />
+        </div>
+        <div class="shake-card__body">
+          <div class="shake-card__row">
+            <h3>Choco Overload</h3>
+            <span class="shake-card__price">$7.50</span>
+          </div>
+          <p>Belgian dark chocolate, real cocoa nibs, shaved chocolate curls, whipped cream.</p>
+          <p class="shake-card__ingredients">Milk &middot; dark chocolate &middot; cocoa &middot; cream</p>
+        </div>
+      </article>
+
+      <article class="shake-card" data-tilt-card>
+        <div class="shake-card__media">
+          <img src="assets/images/shake-strawberry.png" alt="Real photograph of Strawberry Cloud milkshake" data-tilt-img />
+        </div>
+        <div class="shake-card__body">
+          <div class="shake-card__row">
+            <h3>Strawberry Cloud</h3>
+            <span class="shake-card__price">$7.00</span>
+          </div>
+          <p>Whole strawberries, real cream, a fresh strawberry crown, strawberry drizzle.</p>
+          <p class="shake-card__ingredients">Milk &middot; strawberries &middot; cream</p>
+        </div>
+      </article>
+
+      <article class="shake-card" data-tilt-card>
+        <div class="shake-card__media">
+          <img src="assets/images/shake-pistachio.png" alt="Real photograph of Pistachio Dream milkshake" data-tilt-img />
+        </div>
+        <div class="shake-card__body">
+          <div class="shake-card__row">
+            <h3>Pistachio Dream</h3>
+            <span class="shake-card__price">$8.00</span>
+          </div>
+          <p>Roasted pistachio paste, crushed real pistachios, a touch of real cream.</p>
+          <p class="shake-card__ingredients">Milk &middot; pistachios &middot; cream</p>
+        </div>
+      </article>
+
+      <article class="shake-card" data-tilt-card>
+        <div class="shake-card__media">
+          <img src="assets/images/shake-mango.png" alt="Real photograph of Mango Blast milkshake" data-tilt-img />
+        </div>
+        <div class="shake-card__body">
+          <div class="shake-card__row">
+            <h3>Mango Blast</h3>
+            <span class="shake-card__price">$7.25</span>
+          </div>
+          <p>Ripe mango blended thick, fresh mango chunks, a squeeze of lime.</p>
+          <p class="shake-card__ingredients">Milk &middot; mango &middot; cream</p>
+        </div>
+      </article>
+
+      <article class="shake-card" data-tilt-card>
+        <div class="shake-card__media">
+          <img src="assets/images/shake-caramel.png" alt="Real photograph of Nutty Caramel milkshake" data-tilt-img />
+        </div>
+        <div class="shake-card__body">
+          <div class="shake-card__row">
+            <h3>Nutty Caramel</h3>
+            <span class="shake-card__price">$8.25</span>
+          </div>
+          <p>Salted caramel, toasted almonds, cashews and hazelnuts, caramel drizzle.</p>
+          <p class="shake-card__ingredients">Milk &middot; caramel &middot; mixed nuts &middot; cream</p>
+        </div>
+      </article>
+
+      <article class="shake-card" data-tilt-card>
+        <div class="shake-card__media">
+          <img src="assets/images/shake-cookie.png" alt="Real photograph of Cookie Monster milkshake" data-tilt-img />
+        </div>
+        <div class="shake-card__body">
+          <div class="shake-card__row">
+            <h3>Cookie Monster</h3>
+            <span class="shake-card__price">$7.75</span>
+          </div>
+          <p>Crushed real cookies blended in, cookie crumble topping, whipped cream.</p>
+          <p class="shake-card__ingredients">Milk &middot; cookies &middot; cream</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ CRAFT / ABOUT ============ -->
+  <section class="craft" id="about">
+    <div class="craft__bg" style="background-image:url('assets/images/bg-dark-choc.jpg')"></div>
+    <div class="craft__inner">
+      <span class="eyebrow eyebrow--light">Our craft</span>
+      <h2>Built from real ingredients, on camera.</h2>
+      <p>Every photograph on this site is a real ingredient — real fruit, real nuts, real chocolate, real cream, shot as itself. Nothing here is a render pretending to be food.</p>
+
+      <div class="craft__grid">
+        <div class="craft__item">
+          <img src="assets/images/strawberry.png" alt="Real strawberry" />
+          <span>Whole strawberries</span>
+        </div>
+        <div class="craft__item">
+          <img src="assets/images/cashews.png" alt="Real cashews" />
+          <span>Hand-cracked nuts</span>
+        </div>
+        <div class="craft__item">
+          <img src="assets/images/chocolate.png" alt="Real chocolate" />
+          <span>Belgian chocolate</span>
+        </div>
+        <div class="craft__item">
+          <img src="assets/images/whipped-cream.png" alt="Real whipped cream" />
+          <span>Fresh whipped cream</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="site-footer__cta">
+      <h2>Real shakes. Made fresh. Every time.</h2>
+      <a href="#menu" class="btn btn--pill btn--lg">Order a Shake</a>
+    </div>
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <a href="#hero" class="site-nav__logo">Shake<span>Factory</span></a>
+        <p>123 Cream Street, Flavour District</p>
+      </div>
+      <div class="site-footer__col">
+        <h4>Menu</h4>
+        <a href="#menu">Choco Overload</a>
+        <a href="#menu">Strawberry Cloud</a>
+        <a href="#menu">Pistachio Dream</a>
+      </div>
+      <div class="site-footer__col">
+        <h4>Shop</h4>
+        <a href="#hero">Home</a>
+        <a href="#ingredients">Ingredients</a>
+        <a href="#about">Our Craft</a>
+      </div>
+      <div class="site-footer__col">
+        <h4>Follow</h4>
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="site-footer__legal">
+      <span>&copy; <span data-year></span> Shake Factory. All photography placeholders — see assets/images/README.md.</span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/vendor/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
