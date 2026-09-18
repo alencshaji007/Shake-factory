@@ -1,10 +1,16 @@
 # About these images
 
-Every image in this folder is a **hand-crafted SVG illustration** — real
+Most images in this folder are **hand-crafted SVG illustrations** — real
 fruit/nut/shake *shapes*, built from layered gradients, shading,
-highlights and detail (strawberry seeds, banana ridges, a milkshake's
-whipped-cream swirl and condensation), not a labeled placeholder box and
-not a stock photo.
+highlights and detail (banana ridges, a milkshake's whipped-cream swirl
+and condensation), not a labeled placeholder box and not a stock photo.
+
+**`strawberry.png` is the first real photo swapped in** — a real cutout
+strawberry with a transparent background, supplied directly by the site
+owner. It's a drop-in example of exactly how every other SVG here is
+meant to be replaced: same filename pattern, same transparent-cutout
+treatment, just a real photograph instead of a vector illustration. See
+`assets.xlsx` (sent separately) for the full remaining checklist.
 
 ## Why SVG instead of photographs
 
@@ -39,12 +45,13 @@ without touching the CSS or JS:
 
 ## Current asset list
 
-**Ingredient icons** — `strawberry.svg`, `banana.svg`, `mango.svg`,
-`blueberries.svg`, `almonds.svg`, `cashews.svg`, `pistachios.svg`,
-`hazelnuts.svg`, `chocolate.svg`, `cookie.svg`, `milk-splash.svg`,
-`whipped-cream.svg`, `ice-cubes.svg` — the scroll-pinned ingredient depth
-scene and the "Our Craft" section use these; `strawberry.svg` alone also
-drives the hero's tumble/scatter phases.
+**Ingredient icons** — `strawberry.png` (real photo), `banana.svg`,
+`mango.svg`, `blueberries.svg`, `almonds.svg`, `cashews.svg`,
+`pistachios.svg`, `hazelnuts.svg`, `chocolate.svg`, `cookie.svg`,
+`milk-splash.svg`, `whipped-cream.svg`, `ice-cubes.svg` — the
+scroll-pinned ingredient depth scene and the "Our Craft" section use
+these; `strawberry.png` alone also drives the hero's tumble/scatter
+phases.
 
 **Product illustrations** — `shake-strawberry.svg`, `shake-chocolate.svg`,
 `shake-mango.svg`, `shake-pistachio.svg`, `shake-caramel.svg`,

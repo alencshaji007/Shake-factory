@@ -698,7 +698,10 @@ def gen_splash_ring():
 
 
 if __name__ == "__main__":
-    gen_strawberry()
+    # gen_strawberry() is intentionally not called — strawberry.png is now
+    # a real cutout photo (see assets/images/README.md). The function is
+    # left in place since strawberry_body() (used by shake garnishes,
+    # splash-ring.svg, and bottle.svg's hang-tag) still depends on it.
     gen_banana()
     gen_mango()
     gen_blueberries()

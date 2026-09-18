@@ -184,9 +184,9 @@ section{ position:relative; }
   position:absolute;
   width:11vw; max-width:140px; min-width:56px;
   opacity:0;
-  /* no CSS drop-shadow here — strawberry.svg already bakes its own
-     shadow in via an internal filter; stacking a second CSS-level
-     drop-shadow on 8 of these at once is needlessly expensive to paint */
+  /* strawberry.png is a real cutout photo with no baked-in shadow of its
+     own (unlike the SVG illustrations elsewhere), so it needs one here */
+  filter:drop-shadow(0 20px 22px rgba(0,0,0,.45));
   will-change:transform,opacity;
 }
 .hero__tumble-item--1{ top:4%;  left:12%; width:13vw; max-width:170px; z-index:6; }
@@ -245,6 +245,7 @@ section{ position:relative; }
   position:absolute; bottom:2%;
   width:11%;
   opacity:0;
+  filter:drop-shadow(0 10px 12px rgba(0,0,0,.4));
 }
 .hero__scatter--1{ left:10%; width:9%; }
 .hero__scatter--2{ left:50%; width:8%; transform:translateX(-50%) rotate(-8deg); }
