@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs><linearGradient id="creamBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F1E6D2"/></linearGradient>
+
+<filter id="softShadow" x="-60%" y="-60%" width="220%" height="220%">
+  <feDropShadow dx="0" dy="6.7" stdDeviation="4.8" flood-color="#2B1E16" flood-opacity="0.30"/>
+</filter>
+</defs>
+<ellipse cx="120" cy="205" rx="64" ry="10" fill="#2B1E16" opacity="0.22"/><g filter="url(#softShadow)"><ellipse cx="120" cy="195.0" rx="80.6" ry="28.6" fill="url(#creamBody)"/><ellipse cx="99.8" cy="186.4" rx="28.2" ry="8.6" fill="#FFFFFF" opacity="0.6"/><ellipse cx="120" cy="174.8" rx="64.3" ry="21.5" fill="url(#creamBody)"/><ellipse cx="103.9" cy="168.4" rx="22.5" ry="6.4" fill="#FFFFFF" opacity="0.6"/><ellipse cx="120" cy="154.7" rx="48.1" ry="14.3" fill="url(#creamBody)"/><ellipse cx="108.0" cy="150.4" rx="16.8" ry="4.3" fill="#FFFFFF" opacity="0.6"/><ellipse cx="120" cy="134.6" rx="31.9" ry="7.2" fill="url(#creamBody)"/><ellipse cx="112.0" cy="132.4" rx="11.1" ry="2.1" fill="#FFFFFF" opacity="0.6"/><path d="M78.4,184.6 Q120,171.6 161.6,184.6" stroke="#D8C7A8" stroke-width="1.4" fill="none" opacity="0.5"/><path d="M78.4,162.9 Q120,149.9 161.6,162.9" stroke="#D8C7A8" stroke-width="1.4" fill="none" opacity="0.5"/><path d="M78.4,141.3 Q120,128.3 161.6,141.3" stroke="#D8C7A8" stroke-width="1.4" fill="none" opacity="0.5"/></g></svg>

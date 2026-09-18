@@ -157,9 +157,11 @@ section{ position:relative; }
 }
 .hero__bg{
   position:absolute; inset:0;
-  background-size:cover; background-position:center;
+  background:
+    radial-gradient(60% 50% at 50% 28%, rgba(255,177,0,0.16) 0%, rgba(255,177,0,0) 70%),
+    radial-gradient(90% 70% at 20% 90%, rgba(232,83,107,0.14) 0%, rgba(232,83,107,0) 65%),
+    linear-gradient(160deg, #4A2E1A 0%, #3B2417 45%, #241209 100%);
   transform:scale(1.08);
-  opacity:.55;
 }
 .hero__vignette{
   position:absolute; inset:0;
@@ -306,8 +308,10 @@ section{ position:relative; }
 }
 .signature__bg{
   position:absolute; inset:0;
-  background-size:cover; background-position:center;
-  opacity:.5;
+  background:
+    radial-gradient(55% 60% at 72% 45%, rgba(255,177,0,0.10) 0%, rgba(255,177,0,0) 70%),
+    radial-gradient(50% 55% at 15% 20%, rgba(232,83,107,0.08) 0%, rgba(232,83,107,0) 70%),
+    linear-gradient(135deg, var(--warm-white) 0%, var(--cream) 100%);
 }
 .signature__inner{
   position:relative; z-index:2;
@@ -396,7 +400,11 @@ section{ position:relative; }
   overflow:hidden;
 }
 .craft__bg{
-  position:absolute; inset:0; background-size:cover; background-position:center; opacity:.6;
+  position:absolute; inset:0;
+  background:
+    radial-gradient(65% 55% at 50% 20%, rgba(255,177,0,0.12) 0%, rgba(255,177,0,0) 70%),
+    radial-gradient(70% 60% at 85% 90%, rgba(143,174,93,0.10) 0%, rgba(143,174,93,0) 65%),
+    linear-gradient(180deg, #2A170C 0%, #3B2417 55%, #2A170C 100%);
 }
 .craft__inner{
   position:relative; z-index:2;

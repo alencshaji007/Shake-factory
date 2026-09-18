@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+<defs><linearGradient id="pisShell" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EFE3C8"/><stop offset="1" stop-color="#C9AE7C"/></linearGradient><linearGradient id="pisNut" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B7CE86"/><stop offset="1" stop-color="#7E9A50"/></linearGradient>
+
+<filter id="softShadow" x="-60%" y="-60%" width="220%" height="220%">
+  <feDropShadow dx="0" dy="6.7" stdDeviation="4.8" flood-color="#2B1E16" flood-opacity="0.30"/>
+</filter>
+</defs>
+<ellipse cx="122" cy="202" rx="70" ry="10" fill="#2B1E16" opacity="0.22"/><g transform="rotate(-10 100 122)" filter="url(#softShadow)"><path d="M76.0,122 C76.0,84.0 92.0,70.0 100,70.0 C108.0,70.0 124.0,84.0 124.0,122 C124.0,156.0 108.0,172.0 100,172.0 C92.0,172.0 76.0,156.0 76.0,122 Z" fill="url(#pisShell)"/><path d="M94.0,76.0 C84.0,102.0 84.0,142.0 94.0,166.0 L106.0,166.0 C96.0,140.0 96.0,102.0 106.0,76.0 Z" fill="url(#pisNut)"/><ellipse cx="88.0" cy="102.0" rx="6.0" ry="14.0" fill="#FFFFFF" opacity="0.35"/></g><g transform="rotate(16 150 112)" filter="url(#softShadow)"><path d="M129.6,112 C129.6,79.7 143.2,67.80000000000001 150,67.80000000000001 C156.8,67.80000000000001 170.4,79.7 170.4,112 C170.4,140.9 156.8,154.5 150,154.5 C143.2,154.5 129.6,140.9 129.6,112 Z" fill="url(#pisShell)"/><path d="M144.9,72.9 C136.4,95.0 136.4,129.0 144.9,149.4 L155.1,149.4 C146.6,127.3 146.6,95.0 155.1,72.9 Z" fill="url(#pisNut)"/><ellipse cx="139.8" cy="95.0" rx="5.1" ry="11.9" fill="#FFFFFF" opacity="0.35"/></g></svg>
