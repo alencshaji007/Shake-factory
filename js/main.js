@@ -84,7 +84,7 @@
      HERO — opening cinematic sequence, in three beats:
      1. strawberries tumble through frame
      2. they pour into a fruit-and-cream splash ring
-     3. the ring resolves into the bottle + glass product shot
+     3. the ring resolves into the real shake photo
 
      Initial hidden states are applied immediately (synchronously, before
      the preloader even starts fading) so there's never a frame where the
@@ -95,8 +95,7 @@
   var heroEls = {
     tumbleItems: gsap.utils.toArray("[data-tumble-item]"),
     splash: document.querySelector("[data-hero-splash]"),
-    bottle: document.querySelector("[data-hero-bottle]"),
-    glass: document.querySelector("[data-hero-glass]"),
+    shakePhoto: document.querySelector("[data-hero-shake-photo]"),
     floor: document.querySelector("[data-hero-floor]"),
     scatter: gsap.utils.toArray("[data-hero-scatter]"),
     titleLines: gsap.utils.toArray(".hero__title-line-inner"),
@@ -112,7 +111,7 @@
     if (reduceMotion) {
       gsap.set(h.tumbleItems, { opacity: 0 });
       gsap.set(h.splash, { opacity: 0 });
-      gsap.set([h.bottle, h.glass, h.floor].concat(h.scatter), { opacity: 1, scale: 1, x: 0 });
+      gsap.set([h.shakePhoto, h.floor].concat(h.scatter), { opacity: 1, scale: 1, x: 0 });
       gsap.set([h.eyebrow, h.sub, h.scrollcue], { opacity: 1, y: 0 });
       return;
     }
@@ -134,8 +133,7 @@
     });
     gsap.set(h.splash, { opacity: 0, scale: 0.5, rotate: -12 });
     gsap.set(h.floor, { opacity: 0, scaleX: 0 });
-    gsap.set(h.bottle, { opacity: 0, scale: 0.6, y: 40 });
-    gsap.set(h.glass, { opacity: 0, scale: 0.6, y: 40 });
+    gsap.set(h.shakePhoto, { opacity: 0, scale: 0.6, y: 40 });
     gsap.set(h.scatter, { opacity: 0, scale: 0.4, y: 16 });
     gsap.set(h.eyebrow, { opacity: 0, y: 14 });
     gsap.set(h.titleLines, { yPercent: 130 });
@@ -149,8 +147,7 @@
 
     var tumbleItems = heroEls.tumbleItems;
     var splash = heroEls.splash;
-    var bottle = heroEls.bottle;
-    var glass = heroEls.glass;
+    var shakePhoto = heroEls.shakePhoto;
     var floor = heroEls.floor;
     var scatter = heroEls.scatter;
     var titleLines = heroEls.titleLines;
@@ -192,9 +189,8 @@
       // beat 3 — resolve into the product shot
       .to(splash, { opacity: 0, scale: 1.3, duration: 0.5, ease: "power2.in" }, "+=0.05")
       .to(floor, { opacity: 1, scaleX: 1, duration: 0.6, ease: "power2.out" }, "-=0.4")
-      .to(bottle, { opacity: 1, scale: 1, y: 0, duration: 0.8 }, "-=0.45")
-      .to(glass, { opacity: 1, scale: 1, y: 0, duration: 0.8 }, "-=0.62")
-      .to(scatter, { opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.08 }, "-=0.5")
+      .to(shakePhoto, { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.2)" }, "-=0.45")
+      .to(scatter, { opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.08 }, "-=0.4")
       .to(eyebrow, { opacity: 1, y: 0, duration: 0.6 }, "-=0.55")
       .to(titleLines, { yPercent: 0, duration: 0.9, stagger: 0.08, ease: "power4.out" }, "-=0.5")
       .to(sub, { opacity: 1, y: 0, duration: 0.7 }, "-=0.55")
@@ -210,7 +206,7 @@
         scrub: 0.6,
       },
     })
-      .to([bottle, glass], { scale: 1.2, y: -50, opacity: 0, filter: "blur(6px)", ease: "none" }, 0)
+      .to(shakePhoto, { scale: 1.2, y: -50, opacity: 0, filter: "blur(6px)", ease: "none" }, 0)
       .to(scatter, { y: -80, opacity: 0, ease: "none" }, 0)
       .to(floor, { opacity: 0, ease: "none" }, 0)
       .to(".hero__copy", { y: -80, opacity: 0, ease: "none" }, 0)

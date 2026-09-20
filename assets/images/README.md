@@ -6,12 +6,13 @@ where no photo exists yet). Every real photo listed below was uploaded
 by the site owner, converted to WebP, and had its background cleaned up
 where needed — nothing here is AI-generated.
 
-## Real photographs (12 files)
+## Real photographs (13 files)
 
 | File | Shows | Source |
 |---|---|---|
 | `strawberry.png` | Two strawberries, transparent bg | user-supplied |
 | `strawberry-alt.webp` | Single heart-shaped strawberry | user-supplied (bg removed) |
+| `photo-strawberry-shake.webp` | Full real strawberry milkshake in a glass, splash crown on top, transparent bg — the hero's product shot | user-supplied |
 | `banana.webp` | Single banana, transparent bg | user-supplied |
 | `mango.webp` | Six mango slices/wedges | user-supplied (bg removed) |
 | `blueberries.webp` | Cluster of 4 (composited from one real blueberry photo, rotated/scaled — same photograph, arranged as a group) | user-supplied |
@@ -27,7 +28,8 @@ where needed — nothing here is AI-generated.
 
 `hazelnuts.svg`, `whipped-cream.svg`, `cookie.svg` (the plain ingredient
 one — `shake-cookie.svg` is different), the six `shake-*.svg` glass
-illustrations, `bottle.svg`, and `splash-ring.svg`. See
+illustrations (used only on the menu cards + signature section now —
+the hero uses the real photo above instead), and `splash-ring.svg`. See
 [`scripts/generate_svg_assets.py`](../../scripts/generate_svg_assets.py)
 if you want to regenerate or tweak any of these — send real photos for
 any of them and they'll get swapped the same way the rest were.
@@ -59,8 +61,9 @@ Same process as before — no code restructuring needed:
 ## Where things are used
 
 - **Hero** — `strawberry.png` (tumble/scatter) + `strawberry-alt.webp`
-  (one scatter spot, for variety) + `bottle.svg` + `shake-strawberry.svg`
-  + `splash-ring.svg`.
+  (one scatter spot, for variety) + `splash-ring.svg` (pour transition)
+  + `photo-strawberry-shake.webp` (the real product shot — replaced an
+  earlier bottle+glass illustration pairing).
 - **Ingredients depth scene** — all 9 ingredient photos above, plus
   `hazelnuts.svg` and `whipped-cream.svg`.
 - **Signature** — `shake-strawberry.svg` + strawberry floaters.

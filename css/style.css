@@ -212,44 +212,39 @@ section{ position:relative; }
   will-change:transform,opacity;
 }
 
-/* ---- Phase 3: product reveal — bottle + glass on a glossy floor ---- */
+/* ---- Phase 3: product reveal — the real shake photo on a glossy floor ---- */
 .hero__product{
   position:absolute; z-index:10;
-  top:29%; left:50%;
-  width:min(44vw, 500px);
-  height:min(30vh, 270px);
+  top:25%; left:50%;
+  width:min(28vw, 300px);
+  height:min(26vh, 235px);
   transform:translate(-50%,-50%);
 }
 .hero__floor{
   position:absolute; left:50%; bottom:2%;
-  width:90%; height:28px;
+  width:78%; height:28px;
   transform:translateX(-50%) scaleX(0);
   background:radial-gradient(closest-side, rgba(255,180,190,.35), rgba(255,180,190,0) 75%);
   opacity:0;
 }
-.hero__bottle{
-  position:absolute; left:32%; bottom:4%;
-  width:38%;
+.hero__shake-photo{
+  position:absolute; left:50%; bottom:4%;
+  width:86%;
   transform:translate(-50%,0) scale(.7);
   opacity:0;
-  will-change:transform,opacity;
-}
-.hero__glass{
-  position:absolute; left:68%; bottom:4%;
-  width:42%;
-  transform:translate(-50%,0) scale(.7);
-  opacity:0;
+  /* real photograph, transparent bg, no baked-in shadow like the SVGs have */
+  filter:drop-shadow(0 30px 34px rgba(0,0,0,.5));
   will-change:transform,opacity;
 }
 .hero__scatter{
   position:absolute; bottom:2%;
-  width:11%;
+  width:14%;
   opacity:0;
   filter:drop-shadow(0 10px 12px rgba(0,0,0,.4));
 }
-.hero__scatter--1{ left:10%; width:9%; }
-.hero__scatter--2{ left:50%; width:8%; transform:translateX(-50%) rotate(-8deg); }
-.hero__scatter--3{ left:90%; width:10%; }
+.hero__scatter--1{ left:-10%; width:13%; }
+.hero__scatter--2{ left:50%; width:11%; transform:translateX(-50%) rotate(-8deg); }
+.hero__scatter--3{ left:110%; width:15%; }
 
 .hero__copy{
   position:absolute; z-index:12;
