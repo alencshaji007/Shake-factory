@@ -201,8 +201,8 @@ section{ position:relative; }
 /* ---- Phase 2: splash ring pour transition ---- */
 .hero__splash{
   position:absolute; z-index:8;
-  top:26%; left:50%;
-  width:min(34vw, 400px);
+  top:38%; left:50%;
+  width:min(24vw, 260px);
   transform:translate(-50%,-50%) scale(.6);
   opacity:0;
   /* splash-ring.svg has no internal shadow filter (it's a big, many-
@@ -215,9 +215,9 @@ section{ position:relative; }
 /* ---- Phase 3: product reveal — bottle + glass on a glossy floor ---- */
 .hero__product{
   position:absolute; z-index:10;
-  top:25%; left:50%;
-  width:min(46vw, 520px);
-  height:min(34vh, 300px);
+  top:29%; left:50%;
+  width:min(44vw, 500px);
+  height:min(30vh, 270px);
   transform:translate(-50%,-50%);
 }
 .hero__floor{
