@@ -6,7 +6,7 @@ where no photo exists yet). Every real photo listed below was uploaded
 by the site owner, converted to WebP, and had its background cleaned up
 where needed — nothing here is AI-generated.
 
-## Real photographs (13 files)
+## Real photographs (15 files)
 
 | File | Shows | Source |
 |---|---|---|
@@ -14,9 +14,10 @@ where needed — nothing here is AI-generated.
 | `strawberry-alt.webp` | Single heart-shaped strawberry | user-supplied (bg removed) |
 | `photo-strawberry-shake.webp` | Full real strawberry milkshake in a glass, splash crown on top, transparent bg — the hero's product shot | user-supplied |
 | `banana.webp` | Single banana, transparent bg | user-supplied |
-| `mango.webp` | Six mango slices/wedges | user-supplied (bg removed) |
+| `mango.webp` | Six mango wedges scattered mid-air, transparent bg | user-supplied (bg removed — arrived as a flattened JPG with a checkerboard "transparency preview" baked in, not real alpha; see below) |
 | `blueberries.webp` | Cluster of 4 (composited from one real blueberry photo, rotated/scaled — same photograph, arranged as a group) | user-supplied |
-| `almonds.webp` | Scattered almond group | user-supplied |
+| `almonds.webp` | Scattered group of ~16 whole almonds, transparent bg | user-supplied |
+| `coffee-beans.webp` | Scattered group of 11 roasted coffee beans, transparent bg | user-supplied |
 | `cashews.webp` | Cashew group | user-supplied |
 | `pistachios.webp` | Single opened pistachio | user-supplied |
 | `chocolate.webp` | Chocolate syrup swirl | user-supplied |
@@ -46,6 +47,16 @@ for background), and feathers the edge — no AI background-removal tool
 involved. Run it as `python3 scripts/remove_bg.py in.jpg out.png` on any
 future studio-background photo.
 
+`mango.webp` needed a variant of that: it arrived as a JPG with a
+two-tone grey checkerboard baked into the pixels (the classic
+"transparency preview" pattern some editors flatten into an export) —
+not a real alpha channel. [`scripts/remove_bg_checker.py`](../../scripts/remove_bg_checker.py)
+keys on pixels that are both near-grayscale and light rather than a
+single background color, then does the same border-connected flood
+fill and feather. Run it as
+`python3 scripts/remove_bg_checker.py in.jpg out.png` if another photo
+shows up with that same checker pattern.
+
 ## Swapping in more real photography
 
 Same process as before — no code restructuring needed:
@@ -65,14 +76,35 @@ Same process as before — no code restructuring needed:
   real product shot — replaced an earlier bottle+glass illustration
   pairing, and the splash-ring transition between them was later
   removed too — the tumble now settles straight into the product shot).
-- **Ingredients depth scene** — all 9 ingredient photos above, plus
-  `hazelnuts.svg` and `whipped-cream.svg`.
-- **Signature** — `shake-strawberry.svg` + strawberry floaters.
+- **Ingredients depth scene** — all 11 ingredient photos above (including
+  the new `almonds.webp` and `coffee-beans.webp`), plus `hazelnuts.svg`
+  and `whipped-cream.svg`. Every image in this scene has a slow,
+  continuously-looping idle drift/rotate (see "Idle motion" below) on
+  top of its scroll-driven parallax, so the section keeps moving gently
+  even when the page isn't being scrolled.
+- **Signature** — `shake-strawberry.svg` + strawberry floaters (also
+  idle-drifting).
 - **Collection (menu cards)** — the six `shake-*.svg` illustrations.
 - **Showcase** (new section, between Menu and Our Craft) — the three
   full real product photographs.
-- **Our Craft** — 6 tiles: strawberries, cashews, chocolate (real
-  photos), whipped cream (illustration), banana, mango (real photos).
+- **Our Craft** — 8 tiles in a 4-column grid: strawberries, cashews,
+  chocolate, banana, mango, almonds, coffee beans (real photos) and
+  whipped cream (illustration). Each tile has a slow idle "breathe"
+  scale pulse.
+
+## Idle motion ("alive" page feel)
+
+Past their one-time scroll-triggered entrance, the ingredient images
+above no longer sit perfectly still — each one loops a small
+(±9px drift / ±1.6° rotate, or a subtle scale pulse on the Our Craft
+circles) animation indefinitely, staggered per-image with different
+durations/delays so nothing moves in lockstep. It's done with the
+standalone CSS `translate`/`rotate`/`scale` properties (not `transform`)
+specifically so it composes cleanly with whatever GSAP is doing to the
+same element's `transform` for scroll parallax, instead of fighting it.
+See `@keyframes idle-drift` / `idle-breathe` in `css/style.css`. It's
+automatically disabled for `prefers-reduced-motion: reduce` along with
+every other animation on the site.
 
 ## Regenerating the illustrations
 
