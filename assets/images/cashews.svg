@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
-<defs><linearGradient id="cw1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3E3C3"/><stop offset="1" stop-color="#C79A5B"/></linearGradient><linearGradient id="cw2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EAD5A8"/><stop offset="1" stop-color="#B9874E"/></linearGradient>
-
-<filter id="softShadow" x="-60%" y="-60%" width="220%" height="220%">
-  <feDropShadow dx="0" dy="6.7" stdDeviation="4.8" flood-color="#2B1E16" flood-opacity="0.30"/>
-</filter>
-</defs>
-<ellipse cx="122" cy="200" rx="70" ry="10" fill="#2B1E16" opacity="0.22"/><g transform="rotate(-12 105 120)" filter="url(#softShadow)"><path d="M123.2,94.1 A27.6,27.6 0 1,1 83.5,133.8" fill="none" stroke="url(#cw1)" stroke-width="17.2" stroke-linecap="round"/><path d="M123.2,94.1 A27.6,27.6 0 1,1 83.5,133.8" fill="none" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" opacity="0.35" transform="translate(-2.8,-2.8)"/></g><g transform="rotate(150 155 108)" filter="url(#softShadow)"><path d="M170.0,86.6 A22.8,22.8 0 1,1 137.2,119.4" fill="none" stroke="url(#cw2)" stroke-width="14.2" stroke-linecap="round"/><path d="M170.0,86.6 A22.8,22.8 0 1,1 137.2,119.4" fill="none" stroke="#FFFFFF" stroke-width="4.6" stroke-linecap="round" opacity="0.35" transform="translate(-2.3,-2.3)"/></g></svg>

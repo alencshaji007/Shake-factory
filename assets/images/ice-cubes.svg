@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
-<defs>
-
-<filter id="softShadow" x="-60%" y="-60%" width="220%" height="220%">
-  <feDropShadow dx="0" dy="6.7" stdDeviation="4.8" flood-color="#2B1E16" flood-opacity="0.30"/>
-</filter>
-</defs>
-<ellipse cx="120" cy="200" rx="66" ry="10" fill="#2B1E16" opacity="0.22"/><g transform="rotate(-6 95 140)" filter="url(#softShadow)" opacity="0.88"><polygon points="61,123.0 95,106 129,123.0 95,140" fill="#E9F5FA"/><polygon points="61,123.0 95,140 95,174 61,157.0" fill="#CFE7F0"/><polygon points="95,140 129,123.0 129,157.0 95,174" fill="#AACDDD"/><line x1="81.4" y1="136.6" x2="91.6" y2="157.0" stroke="#FFFFFF" stroke-width="2" opacity="0.6"/></g><g transform="rotate(10 150 122)" filter="url(#softShadow)" opacity="0.88"><polygon points="120,107.0 150,92 180,107.0 150,122" fill="#E9F5FA"/><polygon points="120,107.0 150,122 150,152 120,137.0" fill="#CFE7F0"/><polygon points="150,122 180,107.0 180,137.0 150,152" fill="#AACDDD"/><line x1="138.0" y1="119.0" x2="147.0" y2="137.0" stroke="#FFFFFF" stroke-width="2" opacity="0.6"/></g></svg>

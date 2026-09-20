@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
-<defs><linearGradient id="chocBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6E4A2E"/><stop offset="0.5" stop-color="#4A2E1A"/><stop offset="1" stop-color="#2A170C"/></linearGradient>
-
-<filter id="softShadow" x="-60%" y="-60%" width="220%" height="220%">
-  <feDropShadow dx="0" dy="6.7" stdDeviation="4.8" flood-color="#2B1E16" flood-opacity="0.30"/>
-</filter>
-</defs>
-<ellipse cx="122" cy="202" rx="68" ry="10" fill="#2B1E16" opacity="0.22"/><g transform="rotate(-12 100 128)" filter="url(#softShadow)"><polygon points="58.0,86.0 125.2,77.6 146.2,119.6 137.8,170.0 87.4,174.2 49.6,136.4" fill="url(#chocBody)"/><line x1="66.4" y1="102.8" x2="129.4" y2="123.8" stroke="#FFFFFF" stroke-width="6.7" opacity="0.28" stroke-linecap="round"/></g><g transform="rotate(20 158 118)" filter="url(#softShadow)"><polygon points="124.0,84.0 178.4,77.2 195.4,111.2 188.6,152.0 147.8,155.4 117.2,124.8" fill="url(#chocBody)"/><line x1="130.8" y1="97.6" x2="181.8" y2="114.6" stroke="#FFFFFF" stroke-width="5.4" opacity="0.28" stroke-linecap="round"/></g><g transform="rotate(55 128 172)" filter="url(#softShadow)"><polygon points="98.0,142.0 146.0,136.0 161.0,166.0 155.0,202.0 119.0,205.0 92.0,178.0" fill="url(#chocBody)"/><line x1="104.0" y1="154.0" x2="149.0" y2="169.0" stroke="#FFFFFF" stroke-width="4.8" opacity="0.28" stroke-linecap="round"/></g></svg>

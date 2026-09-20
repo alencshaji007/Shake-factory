@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
-<defs>
-<linearGradient id="mangoBody" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#8FAE5D"/><stop offset="0.35" stop-color="#FFC94D"/><stop offset="0.75" stop-color="#FF9F45"/><stop offset="1" stop-color="#E8536B"/></linearGradient>
-<filter id="softShadow" x="-60%" y="-60%" width="220%" height="220%">
-  <feDropShadow dx="0" dy="6.7" stdDeviation="4.8" flood-color="#2B1E16" flood-opacity="0.30"/>
-</filter>
-</defs>
-<ellipse cx="122" cy="205" rx="58" ry="10" fill="#2B1E16" opacity="0.22"/><path d="M120,34 C156,34 182,64 184,104 C186,148 158,190 118,190 C80,190 50,154 52,110 C54,68 84,34 120,34 Z" fill="url(#mangoBody)" filter="url(#softShadow)"/><path d="M112,36 C116,28 128,28 130,37 C124,40 117,40 112,36 Z" fill="#5C3A21"/><ellipse cx="96" cy="78" rx="22" ry="30" fill="#FFFFFF" opacity="0.32" transform="rotate(-18 96 78)"/><ellipse cx="150" cy="130" rx="16" ry="22" fill="#7A1F2E" opacity="0.15" transform="rotate(20 150 130)"/></svg>

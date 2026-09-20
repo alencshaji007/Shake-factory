@@ -362,6 +362,18 @@
   });
 
   /* =========================================================
+     SHOWCASE — real product photographs fade/rise into view
+     ========================================================= */
+  gsap.fromTo(".showcase__card", { opacity: 0, y: 50 }, {
+    opacity: 1, y: 0, duration: 0.9, stagger: 0.14, ease: "power3.out",
+    scrollTrigger: { trigger: ".showcase__grid", start: "top 85%", toggleActions: "play none none reverse" },
+  });
+  gsap.fromTo(".showcase__head > *", { opacity: 0, y: 24 }, {
+    opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: "power3.out",
+    scrollTrigger: { trigger: ".showcase", start: "top 75%", toggleActions: "play none none reverse" },
+  });
+
+  /* =========================================================
      CRAFT — ingredient portraits fade/rise into view
      ========================================================= */
   gsap.fromTo(".craft__item", { opacity: 0, y: 40 }, {
