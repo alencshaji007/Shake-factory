@@ -27,9 +27,9 @@ where needed — nothing here is AI-generated.
 ## Still SVG illustrations (no matching photo yet)
 
 `hazelnuts.svg`, `whipped-cream.svg`, `cookie.svg` (the plain ingredient
-one — `shake-cookie.svg` is different), the six `shake-*.svg` glass
+one — `shake-cookie.svg` is different), and the six `shake-*.svg` glass
 illustrations (used only on the menu cards + signature section now —
-the hero uses the real photo above instead), and `splash-ring.svg`. See
+the hero uses the real photo above instead). See
 [`scripts/generate_svg_assets.py`](../../scripts/generate_svg_assets.py)
 if you want to regenerate or tweak any of these — send real photos for
 any of them and they'll get swapped the same way the rest were.
@@ -61,9 +61,10 @@ Same process as before — no code restructuring needed:
 ## Where things are used
 
 - **Hero** — `strawberry.png` (tumble/scatter) + `strawberry-alt.webp`
-  (one scatter spot, for variety) + `splash-ring.svg` (pour transition)
-  + `photo-strawberry-shake.webp` (the real product shot — replaced an
-  earlier bottle+glass illustration pairing).
+  (one scatter spot, for variety) + `photo-strawberry-shake.webp` (the
+  real product shot — replaced an earlier bottle+glass illustration
+  pairing, and the splash-ring transition between them was later
+  removed too — the tumble now settles straight into the product shot).
 - **Ingredients depth scene** — all 9 ingredient photos above, plus
   `hazelnuts.svg` and `whipped-cream.svg`.
 - **Signature** — `shake-strawberry.svg` + strawberry floaters.

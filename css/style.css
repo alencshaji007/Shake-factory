@@ -198,21 +198,7 @@ section{ position:relative; }
 .hero__tumble-item--7{ top:32%; left:86%; width:9vw;  max-width:120px; z-index:5; }
 .hero__tumble-item--8{ top:12%; left:92%; width:8vw;  max-width:100px; z-index:2; }
 
-/* ---- Phase 2: splash ring pour transition ---- */
-.hero__splash{
-  position:absolute; z-index:8;
-  top:38%; left:50%;
-  width:min(24vw, 260px);
-  transform:translate(-50%,-50%) scale(.6);
-  opacity:0;
-  /* splash-ring.svg has no internal shadow filter (it's a big, many-
-     shape group and an SVG feDropShadow over that is expensive to
-     rasterize) — this single cheap CSS drop-shadow stands in for it */
-  filter:drop-shadow(0 20px 26px rgba(0,0,0,.4));
-  will-change:transform,opacity;
-}
-
-/* ---- Phase 3: product reveal — the real shake photo on a glossy floor ---- */
+/* ---- Phase 2: product reveal — the real shake photo on a glossy floor ---- */
 .hero__product{
   position:absolute; z-index:10;
   top:25%; left:50%;

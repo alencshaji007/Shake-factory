@@ -81,10 +81,9 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* =========================================================
-     HERO — opening cinematic sequence, in three beats:
+     HERO — opening cinematic sequence, in two beats:
      1. strawberries tumble through frame
-     2. they pour into a fruit-and-cream splash ring
-     3. the ring resolves into the real shake photo
+     2. they settle back and the real shake photo reveals
 
      Initial hidden states are applied immediately (synchronously, before
      the preloader even starts fading) so there's never a frame where the
@@ -94,7 +93,6 @@
      ========================================================= */
   var heroEls = {
     tumbleItems: gsap.utils.toArray("[data-tumble-item]"),
-    splash: document.querySelector("[data-hero-splash]"),
     shakePhoto: document.querySelector("[data-hero-shake-photo]"),
     floor: document.querySelector("[data-hero-floor]"),
     scatter: gsap.utils.toArray("[data-hero-scatter]"),
@@ -110,7 +108,6 @@
 
     if (reduceMotion) {
       gsap.set(h.tumbleItems, { opacity: 0 });
-      gsap.set(h.splash, { opacity: 0 });
       gsap.set([h.shakePhoto, h.floor].concat(h.scatter), { opacity: 1, scale: 1, x: 0 });
       gsap.set([h.eyebrow, h.sub, h.scrollcue], { opacity: 1, y: 0 });
       return;
@@ -131,7 +128,6 @@
       rotate: function (i, el) { return parseFloat(el.dataset.fromRot); },
       filter: "blur(5px)",
     });
-    gsap.set(h.splash, { opacity: 0, scale: 0.5, rotate: -12 });
     gsap.set(h.floor, { opacity: 0, scaleX: 0 });
     gsap.set(h.shakePhoto, { opacity: 0, scale: 0.6, y: 40 });
     gsap.set(h.scatter, { opacity: 0, scale: 0.4, y: 16 });
@@ -146,7 +142,6 @@
     if (reduceMotion) return;
 
     var tumbleItems = heroEls.tumbleItems;
-    var splash = heroEls.splash;
     var shakePhoto = heroEls.shakePhoto;
     var floor = heroEls.floor;
     var scatter = heroEls.scatter;
@@ -175,21 +170,17 @@
         ease: "sine.inOut",
         stagger: { each: 0.04, from: "random" },
       }, "-=0.3")
-      // beat 2 — pour into the splash ring
+      // beat 2 — tumble items fade back, the real shake photo reveals
       .to(tumbleItems, {
-        opacity: 0,
-        scale: 0.6,
-        y: "+=30",
-        filter: "blur(4px)",
-        duration: 0.5,
+        opacity: 0.14,
+        scale: 0.8,
+        y: "+=20",
+        filter: "blur(2px)",
+        duration: 0.6,
         stagger: { each: 0.02, from: "center" },
       }, "-=0.55")
-      .to(splash, { opacity: 1, scale: 1, rotate: 0, duration: 0.7, ease: "back.out(1.4)" }, "-=0.5")
-      .to(splash, { rotate: 10, duration: 0.6, ease: "sine.inOut" }, "-=0.1")
-      // beat 3 — resolve into the product shot
-      .to(splash, { opacity: 0, scale: 1.3, duration: 0.5, ease: "power2.in" }, "+=0.05")
-      .to(floor, { opacity: 1, scaleX: 1, duration: 0.6, ease: "power2.out" }, "-=0.4")
-      .to(shakePhoto, { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: "back.out(1.2)" }, "-=0.45")
+      .to(floor, { opacity: 1, scaleX: 1, duration: 0.6, ease: "power2.out" }, "-=0.35")
+      .to(shakePhoto, { opacity: 1, scale: 1, y: 0, duration: 0.85, ease: "back.out(1.2)" }, "-=0.45")
       .to(scatter, { opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.08 }, "-=0.4")
       .to(eyebrow, { opacity: 1, y: 0, duration: 0.6 }, "-=0.55")
       .to(titleLines, { yPercent: 0, duration: 0.9, stagger: 0.08, ease: "power4.out" }, "-=0.5")

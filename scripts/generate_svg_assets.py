@@ -698,10 +698,11 @@ def gen_splash_ring():
 
 
 if __name__ == "__main__":
-    # gen_strawberry() is intentionally not called — strawberry.png is now
-    # a real cutout photo (see assets/images/README.md). The function is
-    # left in place since strawberry_body() (used by shake garnishes,
-    # splash-ring.svg, and bottle.svg's hang-tag) still depends on it.
+    # gen_strawberry(), gen_bottle() and gen_splash_ring() are intentionally
+    # not called — all three were replaced by real photos the site owner
+    # supplied (see assets/images/README.md). The functions are left in
+    # place since strawberry_body() (used by the shake garnishes) still
+    # depends on gen_strawberry()'s helper.
     gen_banana()
     gen_mango()
     gen_blueberries()
@@ -715,6 +716,4 @@ if __name__ == "__main__":
     gen_whipped_cream()
     gen_ice_cubes()
     gen_shakes()
-    gen_bottle()
-    gen_splash_ring()
     print("done")

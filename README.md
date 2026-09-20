@@ -60,12 +60,10 @@ scripts/generate_svg_assets.py    → regenerates every SVG illustration
 
 ## Sections
 
-1. **Hero** — cinematic opening in three beats, modeled on a reference
-   product-ad video: real-photo strawberries tumble through frame, pour
-   into a fruit-and-cream splash ring, then resolve into a bottle + glass
-   product shot on a glossy floor, followed by the "Shake Factory" title
-   reveal. Scrolling out parallaxes/blurs the whole stage like a camera
-   pull-back.
+1. **Hero** — cinematic opening: real-photo strawberries tumble through
+   frame, settle back, and the real product photo reveals on a glossy
+   floor, followed by the "Shake Factory" title reveal. Scrolling out
+   parallaxes/blurs the whole stage like a camera pull-back.
 2. **Ingredients** — a pinned, scroll-scrubbed depth scene: three layers of
    real ingredient photos + a couple of illustrations move at different
    speeds/rotations to simulate 3D depth without any fake 3D models.
