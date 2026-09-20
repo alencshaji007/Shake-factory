@@ -6,10 +6,11 @@ where no photo exists yet). Every real photo listed below was uploaded
 by the site owner, converted to WebP, and had its background cleaned up
 where needed — nothing here is AI-generated.
 
-## Real photographs (15 files)
+## Real photographs (16 files)
 
 | File | Shows | Source |
 |---|---|---|
+| `photo-chocolate-mocha.webp` | Full real Chocolate Mocha milkshake — chocolate chunks, whipped cream, chocolate shavings and drizzle, transparent bg — used on the Chocolate Mocha menu card (replaced the "Cookie Monster" SVG illustration) | user-supplied |
 | `strawberry.png` | Two strawberries, transparent bg | user-supplied |
 | `strawberry-alt.webp` | Single heart-shaped strawberry | user-supplied (bg removed) |
 | `photo-strawberry-shake.webp` | Full real strawberry milkshake in a glass, splash crown on top, transparent bg — the hero's product shot | user-supplied |
@@ -28,9 +29,11 @@ where needed — nothing here is AI-generated.
 ## Still SVG illustrations (no matching photo yet)
 
 `hazelnuts.svg`, `whipped-cream.svg`, `cookie.svg` (the plain ingredient
-one — `shake-cookie.svg` is different), and the six `shake-*.svg` glass
-illustrations (used only on the menu cards + signature section now —
-the hero uses the real photo above instead). See
+one — `shake-cookie.svg` is different, and is now unused: the Cookie
+Monster menu card was replaced by a real Chocolate Mocha photo, see
+below), and the remaining five `shake-*.svg` glass illustrations (used
+on the other five menu cards + signature section now — the hero uses
+the real photo above instead). See
 [`scripts/generate_svg_assets.py`](../../scripts/generate_svg_assets.py)
 if you want to regenerate or tweak any of these — send real photos for
 any of them and they'll get swapped the same way the rest were.
@@ -84,7 +87,9 @@ Same process as before — no code restructuring needed:
   even when the page isn't being scrolled.
 - **Signature** — `shake-strawberry.svg` + strawberry floaters (also
   idle-drifting).
-- **Collection (menu cards)** — the six `shake-*.svg` illustrations.
+- **Collection (menu cards)** — five `shake-*.svg` illustrations, plus
+  the real `photo-chocolate-mocha.webp` photo for the Chocolate Mocha
+  card (was "Cookie Monster" / `shake-cookie.svg`).
 - **Showcase** (new section, between Menu and Our Craft) — the three
   full real product photographs.
 - **Our Craft** — 8 tiles in a 4-column grid: strawberries, cashews,
