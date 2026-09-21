@@ -13,7 +13,7 @@ where needed — nothing here is AI-generated.
 | `photo-chocolate-mocha.webp` | Full real Chocolate Mocha milkshake — chocolate chunks, whipped cream, chocolate shavings and drizzle, transparent bg — used on the Chocolate Mocha menu card (replaced the "Cookie Monster" SVG illustration) | user-supplied |
 | `strawberry.png` | Two strawberries, transparent bg | user-supplied |
 | `strawberry-alt.webp` | Single heart-shaped strawberry | user-supplied (bg removed) |
-| `photo-strawberry-shake.webp` | Full real strawberry milkshake in a glass, splash crown on top, transparent bg — the hero's product shot | user-supplied |
+| `photo-strawberry-shake.webp` | Full real strawberry milkshake in a glass, splash crown on top, transparent bg — *currently unused* (was the hero's product shot before that was replaced by the title-only hero, see below) | user-supplied |
 | `banana.webp` | Single banana, transparent bg | user-supplied |
 | `mango.webp` | Six mango wedges scattered mid-air, transparent bg | user-supplied (bg removed — arrived as a flattened JPG with a checkerboard "transparency preview" baked in, not real alpha; see below) |
 | `blueberries.webp` | Cluster of 4 (composited from one real blueberry photo, rotated/scaled — same photograph, arranged as a group) | user-supplied |
@@ -74,11 +74,14 @@ Same process as before — no code restructuring needed:
 
 ## Where things are used
 
-- **Hero** — `strawberry.png` (tumble/scatter) + `strawberry-alt.webp`
-  (one scatter spot, for variety) + `photo-strawberry-shake.webp` (the
-  real product shot — replaced an earlier bottle+glass illustration
-  pairing, and the splash-ring transition between them was later
-  removed too — the tumble now settles straight into the product shot).
+- **Hero** — `strawberry.png` (tumble), plus the WebGL 3D coffee
+  bean/pistachio field described above. `photo-strawberry-shake.webp`
+  (previously the hero's product shot, after the bottle+glass
+  illustration and then the splash-ring transition were each removed
+  in turn) is currently unused — the hero now settles the tumble
+  straight into the "Shake Factory" title instead of a product shot.
+  The file is kept in case it's wanted again; it's still a real,
+  user-supplied photo.
 - **Ingredients depth scene** — all 11 ingredient photos above (including
   the new `almonds.webp` and `coffee-beans.webp`), plus `hazelnuts.svg`
   and `whipped-cream.svg`. Every image in this scene has a slow,

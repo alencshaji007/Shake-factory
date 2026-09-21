@@ -83,7 +83,7 @@
   /* =========================================================
      HERO — opening cinematic sequence, in two beats:
      1. strawberries tumble through frame
-     2. they settle back and the real shake photo reveals
+     2. they settle back and the title/copy reveal
 
      Initial hidden states are applied immediately (synchronously, before
      the preloader even starts fading) so there's never a frame where the
@@ -93,9 +93,6 @@
      ========================================================= */
   var heroEls = {
     tumbleItems: gsap.utils.toArray("[data-tumble-item]"),
-    shakePhoto: document.querySelector("[data-hero-shake-photo]"),
-    floor: document.querySelector("[data-hero-floor]"),
-    scatter: gsap.utils.toArray("[data-hero-scatter]"),
     titleLines: gsap.utils.toArray(".hero__title-line-inner"),
     eyebrow: document.querySelector("[data-hero-eyebrow]"),
     sub: document.querySelector("[data-hero-sub]"),
@@ -108,7 +105,6 @@
 
     if (reduceMotion) {
       gsap.set(h.tumbleItems, { opacity: 0 });
-      gsap.set([h.shakePhoto, h.floor].concat(h.scatter), { opacity: 1, scale: 1, x: 0 });
       gsap.set([h.eyebrow, h.sub, h.scrollcue], { opacity: 1, y: 0 });
       return;
     }
@@ -128,9 +124,6 @@
       rotate: function (i, el) { return parseFloat(el.dataset.fromRot); },
       filter: "blur(5px)",
     });
-    gsap.set(h.floor, { opacity: 0, scaleX: 0 });
-    gsap.set(h.shakePhoto, { opacity: 0, scale: 0.6, y: 40 });
-    gsap.set(h.scatter, { opacity: 0, scale: 0.4, y: 16 });
     gsap.set(h.eyebrow, { opacity: 0, y: 14 });
     gsap.set(h.titleLines, { yPercent: 130 });
     gsap.set(h.sub, { opacity: 0, y: 16 });
@@ -142,9 +135,6 @@
     if (reduceMotion) return;
 
     var tumbleItems = heroEls.tumbleItems;
-    var shakePhoto = heroEls.shakePhoto;
-    var floor = heroEls.floor;
-    var scatter = heroEls.scatter;
     var titleLines = heroEls.titleLines;
     var eyebrow = heroEls.eyebrow;
     var sub = heroEls.sub;
@@ -170,7 +160,7 @@
         ease: "sine.inOut",
         stagger: { each: 0.04, from: "random" },
       }, "-=0.3")
-      // beat 2 — tumble items fade back, the real shake photo reveals
+      // beat 2 — tumble items fade back, the eyebrow/title/sub reveal
       .to(tumbleItems, {
         opacity: 0.14,
         scale: 0.8,
@@ -179,16 +169,13 @@
         duration: 0.6,
         stagger: { each: 0.02, from: "center" },
       }, "-=0.55")
-      .to(floor, { opacity: 1, scaleX: 1, duration: 0.6, ease: "power2.out" }, "-=0.35")
-      .to(shakePhoto, { opacity: 1, scale: 1, y: 0, duration: 0.85, ease: "back.out(1.2)" }, "-=0.45")
-      .to(scatter, { opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.08 }, "-=0.4")
       .to(eyebrow, { opacity: 1, y: 0, duration: 0.6 }, "-=0.55")
       .to(titleLines, { yPercent: 0, duration: 0.9, stagger: 0.08, ease: "power4.out" }, "-=0.5")
       .to(sub, { opacity: 1, y: 0, duration: 0.7 }, "-=0.55")
       .to(scrollcue, { opacity: 1, duration: 0.6 }, "-=0.3");
 
-    /* Scroll-out: as the user leaves the hero, push the product away
-       with parallax + blur so it reads like a camera pull-back. */
+    /* Scroll-out: as the user leaves the hero, push the copy away with
+       parallax + blur so it reads like a camera pull-back. */
     gsap.timeline({
       scrollTrigger: {
         trigger: ".hero",
@@ -197,9 +184,6 @@
         scrub: 0.6,
       },
     })
-      .to(shakePhoto, { scale: 1.2, y: -50, opacity: 0, filter: "blur(6px)", ease: "none" }, 0)
-      .to(scatter, { y: -80, opacity: 0, ease: "none" }, 0)
-      .to(floor, { opacity: 0, ease: "none" }, 0)
       .to(".hero__copy", { y: -80, opacity: 0, ease: "none" }, 0)
       .to(".hero__bg", { scale: 1.2, ease: "none" }, 0)
       .to(scrollcue, { opacity: 0, ease: "none" }, 0);

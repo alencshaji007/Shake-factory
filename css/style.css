@@ -153,21 +153,21 @@ section{ position:relative; }
   position:relative;
   height:100svh; min-height:640px;
   overflow:hidden;
-  background:#3D0D14;
+  background:#E85B75;
 }
 .hero__bg{
   position:absolute; inset:0;
   background:
-    radial-gradient(55% 48% at 50% 34%, rgba(232,111,127,0.40) 0%, rgba(178,52,74,0.16) 48%, rgba(61,13,20,0) 78%),
-    radial-gradient(90% 70% at 50% 100%, rgba(16,3,6,0.65) 0%, rgba(16,3,6,0) 60%),
-    linear-gradient(160deg, #6B1A26 0%, #4A1019 50%, #2A0810 100%);
+    radial-gradient(60% 52% at 50% 32%, rgba(255,196,206,0.55) 0%, rgba(255,143,163,0.2) 50%, rgba(232,91,117,0) 80%),
+    radial-gradient(90% 70% at 50% 105%, rgba(168,32,58,0.35) 0%, rgba(168,32,58,0) 62%),
+    linear-gradient(160deg, #FF8FA3 0%, #E8536B 48%, #C4324F 100%);
   transform:scale(1.08);
 }
 .hero__vignette{
   position:absolute; inset:0;
   background:
-    radial-gradient(120% 90% at 50% 55%, rgba(61,13,20,0) 0%, rgba(30,7,11,.5) 68%, rgba(16,3,6,.92) 100%),
-    linear-gradient(180deg, rgba(16,3,6,.5) 0%, rgba(16,3,6,0) 22%, rgba(16,3,6,0) 70%, rgba(16,3,6,.7) 100%);
+    radial-gradient(120% 90% at 50% 55%, rgba(232,91,117,0) 0%, rgba(168,32,58,.18) 70%, rgba(120,20,42,.4) 100%),
+    linear-gradient(180deg, rgba(120,20,42,.22) 0%, rgba(120,20,42,0) 22%, rgba(120,20,42,0) 70%, rgba(120,20,42,.32) 100%);
 }
 .hero__grain{
   position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
@@ -206,40 +206,6 @@ section{ position:relative; }
 .hero__tumble-item--7{ top:32%; left:86%; width:9vw;  max-width:120px; z-index:5; }
 .hero__tumble-item--8{ top:12%; left:92%; width:8vw;  max-width:100px; z-index:2; }
 
-/* ---- Phase 2: product reveal — the real shake photo on a glossy floor ---- */
-.hero__product{
-  position:absolute; z-index:10;
-  top:25%; left:50%;
-  width:min(28vw, 300px);
-  height:min(26vh, 235px);
-  transform:translate(-50%,-50%);
-}
-.hero__floor{
-  position:absolute; left:50%; bottom:2%;
-  width:78%; height:28px;
-  transform:translateX(-50%) scaleX(0);
-  background:radial-gradient(closest-side, rgba(255,180,190,.35), rgba(255,180,190,0) 75%);
-  opacity:0;
-}
-.hero__shake-photo{
-  position:absolute; left:50%; bottom:4%;
-  width:86%;
-  transform:translate(-50%,0) scale(.7);
-  opacity:0;
-  /* real photograph, transparent bg, no baked-in shadow like the SVGs have */
-  filter:drop-shadow(0 30px 34px rgba(0,0,0,.5));
-  will-change:transform,opacity;
-}
-.hero__scatter{
-  position:absolute; bottom:2%;
-  width:14%;
-  opacity:0;
-  filter:drop-shadow(0 10px 12px rgba(0,0,0,.4));
-}
-.hero__scatter--1{ left:-10%; width:13%; }
-.hero__scatter--2{ left:50%; width:11%; transform:translateX(-50%) rotate(-8deg); }
-.hero__scatter--3{ left:110%; width:15%; }
-
 .hero__copy{
   position:absolute; z-index:12;
   top:60%; left:50%;
@@ -249,15 +215,34 @@ section{ position:relative; }
   padding:0 1.4rem;
 }
 .hero__title{
-  font-size:clamp(3rem,9vw,7.5rem);
+  font-size:clamp(2.1rem,6.2vw,5.4rem);
   line-height:.92;
   color:var(--warm-white);
+  white-space:nowrap;
 }
 .hero__title-line{
-  display:block;
+  display:inline-block;
   overflow:hidden;
+  /* padding gives the 3D extrusion shadow below room to render without
+     being clipped by the reveal mask; the matching negative margin
+     cancels the padding back out of layout so it doesn't shift anything */
+  padding:0 .3em .32em 0;
+  margin:0 -.3em -.32em 0;
+  vertical-align:top;
 }
-.hero__title-line-inner{ display:block; }
+.hero__title-line-inner{
+  display:block;
+  /* a stepped extrusion in one shared dark shade under both words, like
+     solid 3D signage, plus a soft ambient shadow to lift it off the bg */
+  text-shadow:
+    0.025em 0.025em 0 #7A1220,
+    0.05em  0.05em  0 #7A1220,
+    0.075em 0.075em 0 #7A1220,
+    0.1em   0.1em   0 #7A1220,
+    0.125em 0.125em 0 #7A1220,
+    0.15em  0.15em  0 #7A1220,
+    0.175em 0.175em 0.28em rgba(30,4,10,.45);
+}
 .hero__title-line--accent{ color:var(--strawberry); }
 .hero__sub{
   margin:1.3rem auto 0;

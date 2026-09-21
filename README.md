@@ -65,13 +65,14 @@ scripts/generate_svg_assets.py    → regenerates every SVG illustration
 
 ## Sections
 
-1. **Hero** — cinematic opening: real-photo strawberries tumble through
-   frame, settle back, and the real product photo reveals on a glossy
-   floor, followed by the "Shake Factory" title reveal, all set against
-   a real WebGL 3D field of procedurally-modelled coffee beans and
-   pistachios drifting in the background (`js/hero3d.js`) — blurred and
-   dimmed so it reads as atmosphere, not the main subject. Scrolling out
-   parallaxes/blurs the whole stage like a camera pull-back.
+1. **Hero** — a bright coral-pink cinematic opening: real-photo
+   strawberries tumble through frame and settle back, then the
+   "Shake Factory" title reveals as a single centered line with a
+   solid 3D-extruded text style, set against a real WebGL 3D field of
+   procedurally-modelled coffee beans and pistachios drifting in the
+   background (`js/hero3d.js`) — blurred and dimmed so it reads as
+   atmosphere, not the main subject. Scrolling out parallaxes/blurs the
+   whole stage like a camera pull-back.
 2. **Ingredients** — a pinned, scroll-scrubbed depth scene: three layers of
    real ingredient photos + a couple of illustrations move at different
    speeds/rotations to simulate 3D depth without any fake 3D models, and
