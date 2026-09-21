@@ -43,6 +43,10 @@
     <div class="hero__bg"></div>
     <div class="hero__vignette"></div>
     <div class="hero__grain"></div>
+    <!-- Real WebGL 3D background: procedurally-modelled coffee beans and
+         pistachios drifting behind the scene (js/hero3d.js). Degrades to
+         nothing if WebGL is unavailable. -->
+    <canvas class="hero__3d" data-hero-3d aria-hidden="true"></canvas>
 
     <div class="hero__stage" data-hero-stage>
       <!-- Phase 1: strawberries tumble through frame -->
@@ -351,5 +355,6 @@
 <script src="js/vendor/ScrollTrigger.min.js"></script>
 <script src="js/vendor/lenis.min.js"></script>
 <script src="js/main.js"></script>
+<script type="module" src="js/hero3d.js"></script>
 </body>
 </html>

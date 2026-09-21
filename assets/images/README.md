@@ -111,6 +111,13 @@ See `@keyframes idle-drift` / `idle-breathe` in `css/style.css`. It's
 automatically disabled for `prefers-reduced-motion: reduce` along with
 every other animation on the site.
 
+Note: the hero section's floating coffee beans and pistachios are a
+*separate* thing — a real WebGL 3D scene (`js/hero3d.js`, Three.js),
+not this folder's `coffee-beans.webp` / `almonds.webp` photos rendered
+as flat CSS sprites. Those two beans/pistachios are procedurally
+modelled 3D geometry, built to feel consistent with the real photos
+without depending on any texture file from this folder.
+
 ## Regenerating the illustrations
 
 ```

@@ -2,10 +2,11 @@
 
 A premium, cinematic one-page website for a milkshake brand — real
 ingredient photography and hand-crafted SVG illustrations, composited
-and animated with GSAP + ScrollTrigger and smooth-scrolled with Lenis.
-No fake 3D fruit models, no AI-generated food renders: every visual is
-either a real photograph or a hand-drawn vector illustration of the
-real object, animated as a layer.
+and animated with GSAP + ScrollTrigger and smooth-scrolled with Lenis,
+plus a real WebGL 3D accent (Three.js) drifting behind the hero. Most
+visuals are a real photograph or a hand-drawn vector illustration of
+the real object; the hero's floating coffee beans/pistachios are
+procedurally-modelled 3D geometry rather than a photo or a flat SVG.
 
 ## Running it locally
 
@@ -56,7 +57,8 @@ restructuring needed.
 index.html                        → all markup/sections
 css/style.css                     → design system + layout (palette, type, cards)
 js/main.js                        → Lenis + GSAP ScrollTrigger animation timelines
-js/vendor/                        → self-hosted gsap.min.js, ScrollTrigger.min.js, lenis.min.js
+js/hero3d.js                      → hero's WebGL 3D background (Three.js, ES module)
+js/vendor/                        → self-hosted gsap.min.js, ScrollTrigger.min.js, lenis.min.js, three.module.min.js
 assets/images/                    → all illustration assets (see README in that folder)
 scripts/generate_svg_assets.py    → regenerates every SVG illustration
 ```
@@ -65,7 +67,10 @@ scripts/generate_svg_assets.py    → regenerates every SVG illustration
 
 1. **Hero** — cinematic opening: real-photo strawberries tumble through
    frame, settle back, and the real product photo reveals on a glossy
-   floor, followed by the "Shake Factory" title reveal. Scrolling out
+   floor, followed by the "Shake Factory" title reveal, all set against
+   a real WebGL 3D field of procedurally-modelled coffee beans and
+   pistachios drifting in the background (`js/hero3d.js`) — blurred and
+   dimmed so it reads as atmosphere, not the main subject. Scrolling out
    parallaxes/blurs the whole stage like a camera pull-back.
 2. **Ingredients** — a pinned, scroll-scrubbed depth scene: three layers of
    real ingredient photos + a couple of illustrations move at different
@@ -92,7 +97,11 @@ scripts/generate_svg_assets.py    → regenerates every SVG illustration
 - **Lenis** for smooth-scroll, synced to GSAP's ticker.
 - Vanilla CSS (custom properties, `clamp()` fluid type, `prefers-reduced-motion`
   and `prefers-color-scheme` support) — no framework.
-- Hand-authored SVG illustrations (no icon library, no AI image generation)
-  — see `scripts/generate_svg_assets.py`.
-- No Three.js/3D fruit models — depth is simulated purely with layered
-  illustration parallax.
+- Hand-authored SVG illustrations — see `scripts/generate_svg_assets.py`.
+- **Three.js** (vendored in `js/vendor/three.module.min.js`, loaded as an
+  ES module by `js/hero3d.js`) for the hero's real WebGL 3D background —
+  procedurally-modelled coffee bean and pistachio geometry, no external
+  `.glb`/model downloads. Everywhere else, depth is still simulated with
+  layered CSS parallax rather than 3D. Degrades to nothing if WebGL is
+  unavailable, and to a single static frame under
+  `prefers-reduced-motion`.
