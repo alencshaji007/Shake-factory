@@ -97,6 +97,7 @@
     eyebrow: document.querySelector("[data-hero-eyebrow]"),
     sub: document.querySelector("[data-hero-sub]"),
     scrollcue: document.querySelector("[data-hero-scrollcue]"),
+    canvas3d: document.querySelector("[data-hero-3d]"),
   };
 
   (function setHeroInitialStates() {
@@ -124,10 +125,11 @@
       rotate: function (i, el) { return parseFloat(el.dataset.fromRot); },
       filter: "blur(5px)",
     });
-    gsap.set(h.eyebrow, { opacity: 0, y: 14 });
-    gsap.set(h.titleLines, { yPercent: 130 });
-    gsap.set(h.sub, { opacity: 0, y: 16 });
+    gsap.set(h.eyebrow, { opacity: 0, y: 14, letterSpacing: "0.4em" });
+    gsap.set(h.titleLines, { yPercent: 130, scale: 1.09, filter: "blur(14px)" });
+    gsap.set(h.sub, { opacity: 0, y: 16, filter: "blur(4px)" });
     gsap.set(h.scrollcue, { opacity: 0 });
+    if (h.canvas3d) gsap.set(h.canvas3d, { opacity: 0 });
   })();
 
   function playHeroIntro() {
@@ -139,8 +141,14 @@
     var eyebrow = heroEls.eyebrow;
     var sub = heroEls.sub;
     var scrollcue = heroEls.scrollcue;
+    var canvas3d = heroEls.canvas3d;
 
     var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    // the WebGL bean/pistachio field fades up slowly underneath everything
+    // else, so the whole scene feels like it's materializing as one piece
+    // rather than the canvas just being there from frame one
+    if (canvas3d) tl.to(canvas3d, { opacity: 0.75, duration: 2.2, ease: "power1.out" }, 0);
 
     // beat 1 — tumble
     tl.to(tumbleItems, {
@@ -169,9 +177,18 @@
         duration: 0.6,
         stagger: { each: 0.02, from: "center" },
       }, "-=0.55")
-      .to(eyebrow, { opacity: 1, y: 0, duration: 0.6 }, "-=0.55")
-      .to(titleLines, { yPercent: 0, duration: 0.9, stagger: 0.08, ease: "power4.out" }, "-=0.5")
-      .to(sub, { opacity: 1, y: 0, duration: 0.7 }, "-=0.55")
+      .to(eyebrow, { opacity: 1, y: 0, letterSpacing: "0.14em", duration: 0.8, ease: "power2.out" }, "-=0.55")
+      // the title pulls into focus — blur clears, a slight overshoot scale
+      // settles to rest, and each word rises out of its mask in turn
+      .to(titleLines, {
+        yPercent: 0,
+        scale: 1,
+        filter: "blur(0px)",
+        duration: 1.1,
+        stagger: 0.1,
+        ease: "power4.out",
+      }, "-=0.55")
+      .to(sub, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8 }, "-=0.65")
       .to(scrollcue, { opacity: 1, duration: 0.6 }, "-=0.3");
 
     /* Scroll-out: as the user leaves the hero, push the copy away with
@@ -187,6 +204,12 @@
       .to(".hero__copy", { y: -80, opacity: 0, ease: "none" }, 0)
       .to(".hero__bg", { scale: 1.2, ease: "none" }, 0)
       .to(scrollcue, { opacity: 0, ease: "none" }, 0);
+    if (canvas3d) {
+      gsap.to(canvas3d, {
+        opacity: 0, y: -40, ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 },
+      });
+    }
   }
 
   /* =========================================================
@@ -305,6 +328,11 @@
     var bounds;
     card.addEventListener("pointerenter", function () {
       bounds = card.getBoundingClientRect();
+      // the lift needs to happen here too, not just on pointermove — GSAP
+      // writes the whole transform inline, which silently overrides the
+      // CSS :hover translateY the instant the mouse moves, so without this
+      // the card would only ever tilt and never actually lift off the page
+      gsap.to(card, { y: -8, duration: 0.5, ease: "power3.out" });
     });
     card.addEventListener("pointermove", function (e) {
       if (!bounds) bounds = card.getBoundingClientRect();
@@ -319,6 +347,7 @@
         ease: "power2.out",
       });
       gsap.to(card, {
+        y: -8,
         rotateX: relY * -6,
         rotateY: relX * 6,
         duration: 0.6,
@@ -328,7 +357,7 @@
     });
     card.addEventListener("pointerleave", function () {
       gsap.to(img, { x: 0, y: 0, scale: 1, rotate: 0, duration: 0.8, ease: "power3.out" });
-      gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.8, ease: "power3.out" });
+      gsap.to(card, { y: 0, rotateX: 0, rotateY: 0, duration: 0.8, ease: "power3.out" });
     });
   });
 

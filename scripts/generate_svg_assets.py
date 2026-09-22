@@ -439,13 +439,25 @@ def condensation():
 def build_shake(filename, fill_stops, garnish_fn, whip=True):
     defs_glass = lingrad("glassBody", [(0, "#FFFFFF"), (0.5, "#EAF3F7"), (1, "#D8E6EC")], 0, 0, 1, 0.2)
     defs_fill = lingrad("shakeFill", fill_stops, 0, 0, 0, 1)
-    svg = svg_open(260, 360, defs_glass + defs_fill)
+    defs_pool = lingrad("shakePool", [(0, "rgba(0,0,0,0)"), (1, "#2B1E16")], 0, 0, 0, 1)
+    svg = svg_open(260, 360, defs_glass + defs_fill + defs_pool)
+    # a soft ambient backdrop glow behind the glass, tinted to the fill's
+    # own mid-tone — gives the card some studio-lit context instead of the
+    # glass floating on flat white, closer to how the real photos read
+    svg += f'<ellipse cx="{GLASS_CX}" cy="175" rx="150" ry="170" fill="url(#shakeFill)" opacity="0.06"/>'
     svg += ground_shadow(GLASS_CX, 330, 78, 12)
     # glass body (behind fill for the base, then fill, then glass front highlight/outline)
     svg += f'<path d="{glass_outline_path()}" fill="url(#glassBody)" opacity="0.55" filter="url(#softShadow)"/>'
     svg += f'<clipPath id="glassClip"><path d="{glass_outline_path()}"/></clipPath>'
     svg += f'<g clip-path="url(#glassClip)"><path d="{fill_wave_path(118)}" fill="url(#shakeFill)"/>'
-    svg += f'<ellipse cx="{GLASS_CX-24}" cy="150" rx="14" ry="60" fill="#FFFFFF" opacity="0.12"/></g>'
+    # liquid pooling darker toward the base, for real depth instead of a flat tint
+    svg += f'<rect x="{GLASS_CX-GLASS_BOTTOM_W}" y="260" width="{GLASS_BOTTOM_W*2}" height="70" fill="url(#shakePool)" opacity="0.18"/>'
+    # primary glass highlight (broad, soft) + a tighter bright glossy streak on top of it
+    svg += f'<ellipse cx="{GLASS_CX-24}" cy="150" rx="14" ry="60" fill="#FFFFFF" opacity="0.14"/>'
+    svg += f'<ellipse cx="{GLASS_CX-22}" cy="140" rx="5" ry="46" fill="#FFFFFF" opacity="0.4"/>'
+    # a faint rim-light streak on the opposite edge, so the glass reads as
+    # lit from one side rather than evenly flat
+    svg += f'<ellipse cx="{GLASS_CX+GLASS_BOTTOM_W-10}" cy="180" rx="4" ry="80" fill="#FFFFFF" opacity="0.18"/></g>'
     # glass outline stroke + rim ellipse
     svg += f'<path d="{glass_outline_path()}" fill="none" stroke="#FFFFFF" stroke-width="2.5" opacity="0.65"/>'
     svg += f'<ellipse cx="{GLASS_CX}" cy="{GLASS_TOP_Y}" rx="{GLASS_TOP_W}" ry="10" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.5"/>'
@@ -698,22 +710,15 @@ def gen_splash_ring():
 
 
 if __name__ == "__main__":
-    # gen_strawberry(), gen_bottle() and gen_splash_ring() are intentionally
-    # not called — all three were replaced by real photos the site owner
-    # supplied (see assets/images/README.md). The functions are left in
-    # place since strawberry_body() (used by the shake garnishes) still
-    # depends on gen_strawberry()'s helper.
-    gen_banana()
-    gen_mango()
-    gen_blueberries()
-    gen_almonds()
-    gen_cashews()
-    gen_pistachios()
+    # gen_strawberry(), gen_bottle(), gen_splash_ring(), gen_banana(),
+    # gen_mango(), gen_blueberries(), gen_almonds(), gen_cashews(),
+    # gen_pistachios(), gen_chocolate(), gen_milk_splash() and
+    # gen_ice_cubes() are intentionally not called — all were replaced by
+    # real photos the site owner supplied (see assets/images/README.md).
+    # The functions are left in place since strawberry_body() (used by the
+    # shake garnishes) still depends on gen_strawberry()'s helper.
     gen_hazelnuts()
-    gen_chocolate()
     gen_cookie()
-    gen_milk_splash()
     gen_whipped_cream()
-    gen_ice_cubes()
     gen_shakes()
     print("done")
