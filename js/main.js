@@ -98,6 +98,8 @@
     sub: document.querySelector("[data-hero-sub]"),
     scrollcue: document.querySelector("[data-hero-scrollcue]"),
     canvas3d: document.querySelector("[data-hero-3d]"),
+    video: document.querySelector("[data-hero-video]"),
+    scrim: document.querySelector("[data-hero-scrim]"),
   };
 
   (function setHeroInitialStates() {
@@ -107,6 +109,7 @@
     if (reduceMotion) {
       gsap.set(h.tumbleItems, { opacity: 0 });
       gsap.set([h.eyebrow, h.sub, h.scrollcue], { opacity: 1, y: 0 });
+      if (h.scrim) gsap.set(h.scrim, { opacity: 1 });
       return;
     }
 
@@ -130,6 +133,7 @@
     gsap.set(h.sub, { opacity: 0, y: 16, filter: "blur(4px)" });
     gsap.set(h.scrollcue, { opacity: 0 });
     if (h.canvas3d) gsap.set(h.canvas3d, { opacity: 0 });
+    if (h.scrim) gsap.set(h.scrim, { opacity: 0 });
   })();
 
   function playHeroIntro() {
@@ -142,54 +146,84 @@
     var sub = heroEls.sub;
     var scrollcue = heroEls.scrollcue;
     var canvas3d = heroEls.canvas3d;
+    var video = heroEls.video;
+    var scrim = heroEls.scrim;
 
-    var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    // The eyebrow/title/sub/3D-bean reveal — the "Shake Factory" landing
+    // moment. Shared by both paths below so it always looks the same
+    // regardless of what triggered it.
+    function revealCopy() {
+      var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      if (canvas3d) tl.to(canvas3d, { opacity: 0.75, duration: 1.6, ease: "power1.out" }, 0);
+      if (scrim) tl.to(scrim, { opacity: 1, duration: 1, ease: "power2.out" }, 0.05);
+      tl.to(eyebrow, { opacity: 1, y: 0, letterSpacing: "0.14em", duration: 0.8, ease: "power2.out" }, 0.1)
+        // the title pulls into focus — blur clears, a slight overshoot
+        // scale settles to rest, each word rising out of its mask in turn
+        .to(titleLines, {
+          yPercent: 0,
+          scale: 1,
+          filter: "blur(0px)",
+          duration: 1.1,
+          stagger: 0.1,
+          ease: "power4.out",
+        }, 0.15)
+        .to(sub, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8 }, 0.25)
+        .to(scrollcue, { opacity: 1, duration: 0.6 }, 0.6);
+    }
 
-    // the WebGL bean/pistachio field fades up slowly underneath everything
-    // else, so the whole scene feels like it's materializing as one piece
-    // rather than the canvas just being there from frame one
-    if (canvas3d) tl.to(canvas3d, { opacity: 0.75, duration: 2.2, ease: "power1.out" }, 0);
+    // Fallback for when there's no video (or it can't play): the original
+    // tumble-then-reveal sequence.
+    function playTumbleFallback() {
+      gsap.timeline({ defaults: { ease: "power3.out" } })
+        .to(tumbleItems, {
+          opacity: 1,
+          scale: 1,
+          x: 0,
+          y: 0,
+          rotate: function () { return gsap.utils.random(-20, 20); },
+          filter: "blur(0px)",
+          duration: 1,
+          stagger: { each: 0.07, from: "random" },
+        }, 0.1)
+        .to(tumbleItems, {
+          y: "+=26",
+          rotate: "+=14",
+          duration: 1.1,
+          ease: "sine.inOut",
+          stagger: { each: 0.04, from: "random" },
+        }, "-=0.3")
+        .to(tumbleItems, {
+          opacity: 0.14,
+          scale: 0.8,
+          y: "+=20",
+          filter: "blur(2px)",
+          duration: 0.6,
+          stagger: { each: 0.02, from: "center" },
+        }, "-=0.55")
+        .add(revealCopy, "-=0.55");
+    }
 
-    // beat 1 — tumble
-    tl.to(tumbleItems, {
-      opacity: 1,
-      scale: 1,
-      x: 0,
-      y: 0,
-      rotate: function () { return gsap.utils.random(-20, 20); },
-      filter: "blur(0px)",
-      duration: 1,
-      stagger: { each: 0.07, from: "random" },
-    }, 0.1)
-      .to(tumbleItems, {
-        y: "+=26",
-        rotate: "+=14",
-        duration: 1.1,
-        ease: "sine.inOut",
-        stagger: { each: 0.04, from: "random" },
-      }, "-=0.3")
-      // beat 2 — tumble items fade back, the eyebrow/title/sub reveal
-      .to(tumbleItems, {
-        opacity: 0.14,
-        scale: 0.8,
-        y: "+=20",
-        filter: "blur(2px)",
-        duration: 0.6,
-        stagger: { each: 0.02, from: "center" },
-      }, "-=0.55")
-      .to(eyebrow, { opacity: 1, y: 0, letterSpacing: "0.14em", duration: 0.8, ease: "power2.out" }, "-=0.55")
-      // the title pulls into focus — blur clears, a slight overshoot scale
-      // settles to rest, and each word rises out of its mask in turn
-      .to(titleLines, {
-        yPercent: 0,
-        scale: 1,
-        filter: "blur(0px)",
-        duration: 1.1,
-        stagger: 0.1,
-        ease: "power4.out",
-      }, "-=0.55")
-      .to(sub, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8 }, "-=0.65")
-      .to(scrollcue, { opacity: 1, duration: 0.6 }, "-=0.3");
+    if (video) {
+      // The video is the intro now — it plays once, real footage the site
+      // owner supplied, and "Shake Factory" lands right as it ends. The
+      // tumbling strawberries stay hidden in this path (video already
+      // shows real fruit flying into frame, no need to repeat that beat).
+      var revealed = false;
+      function reveal() {
+        if (revealed) return;
+        revealed = true;
+        revealCopy();
+      }
+      video.addEventListener("ended", reveal);
+      // never leave the title stuck hidden if the video can't play for
+      // some reason (autoplay blocked, slow network, decode error, ...)
+      video.addEventListener("error", reveal);
+      setTimeout(reveal, 11000);
+      var playPromise = video.play();
+      if (playPromise && playPromise.catch) playPromise.catch(reveal);
+    } else {
+      playTumbleFallback();
+    }
 
     /* Scroll-out: as the user leaves the hero, push the copy away with
        parallax + blur so it reads like a camera pull-back. */
@@ -207,6 +241,18 @@
     if (canvas3d) {
       gsap.to(canvas3d, {
         opacity: 0, y: -40, ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 },
+      });
+    }
+    if (video) {
+      gsap.to(video, {
+        opacity: 0, ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 },
+      });
+    }
+    if (scrim) {
+      gsap.to(scrim, {
+        opacity: 0, ease: "none",
         scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 },
       });
     }

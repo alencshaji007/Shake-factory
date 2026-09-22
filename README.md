@@ -3,7 +3,8 @@
 A premium, cinematic one-page website for a milkshake brand — real
 ingredient photography and hand-crafted SVG illustrations, composited
 and animated with GSAP + ScrollTrigger and smooth-scrolled with Lenis,
-plus a real WebGL 3D accent (Three.js) drifting behind the hero. Most
+plus a real WebGL 3D accent (Three.js) drifting behind the hero and a
+real video (supplied by the site owner) opening the hero itself. Most
 visuals are a real photograph or a hand-drawn vector illustration of
 the real object; the hero's floating coffee beans/pistachios are
 procedurally-modelled 3D geometry rather than a photo or a flat SVG.
@@ -62,22 +63,27 @@ js/main.js                        → Lenis + GSAP ScrollTrigger animation timel
 js/hero3d.js                      → hero's WebGL 3D background (Three.js, ES module)
 js/vendor/                        → self-hosted gsap.min.js, ScrollTrigger.min.js, lenis.min.js, three.module.min.js
 assets/images/                    → all illustration assets (see README in that folder)
+assets/video/                     → the hero's intro video (hero-intro.mp4/.webm)
 scripts/generate_svg_assets.py    → regenerates every SVG illustration
 ```
 
 ## Sections
 
-1. **Hero** — a bright, white/soft-blush cinematic opening: real-photo
-   strawberries tumble through frame and settle back, then the
-   "Shake Factory" title pulls into focus (blur → sharp, a slight
-   overshoot scale, each word rising out of its own reveal mask) as a
-   large single centered line with a solid 3D-extruded text style. It's
-   set against a real WebGL 3D field of procedurally-modelled coffee
-   beans and pistachios drifting in the background (`js/hero3d.js`),
-   which fades up slowly under the rest of the scene rather than just
-   being there from frame one — blurred and dimmed so it reads as
-   atmosphere, not the main subject. Scrolling out parallaxes/blurs the
-   whole stage like a camera pull-back.
+1. **Hero** — opens on a real video (`assets/video/hero-intro.mp4`/`.webm`,
+   supplied by the site owner): ingredients flying together, pouring into
+   a blender, and the finished shake splashing up, playing once, full-bleed,
+   muted/autoplaying. Right as it ends, the "Shake Factory" title pulls
+   into focus (blur → sharp, a slight overshoot scale, each word rising
+   out of its own reveal mask) as a large single centered line with a
+   solid 3D-extruded text style, over a scrim that fades in with it so
+   the text stays readable whatever's in frame behind it. A real WebGL
+   3D field of procedurally-modelled coffee beans and pistachios
+   (`js/hero3d.js`) fades up at the same time, blurred and dimmed so it
+   reads as atmosphere. If the video can't play (autoplay blocked, a
+   decode error, or a safety timeout), it falls back to the original
+   tumble-then-reveal animation — strawberries tumble through frame and
+   settle back — so the title always lands one way or another. Scrolling
+   out parallaxes/blurs/fades the whole stage like a camera pull-back.
 2. **Ingredients** — a pinned, scroll-scrubbed depth scene: three layers of
    real ingredient photos + a couple of illustrations move at different
    speeds/rotations to simulate 3D depth without any fake 3D models, and
@@ -115,3 +121,11 @@ scripts/generate_svg_assets.py    → regenerates every SVG illustration
   layered CSS parallax rather than 3D. Degrades to nothing if WebGL is
   unavailable, and to a single static frame under
   `prefers-reduced-motion`.
+- The hero video (`assets/video/`) was processed with `ffmpeg` — the
+  site owner's original export re-encoded to H.264 (`hero-intro.mp4`)
+  and VP9 (`hero-intro.webm`, tried first, since it's noticeably better
+  compressed at the same quality), audio stripped (it plays muted), a
+  `faststart` mp4 for progressive download, plus a poster frame
+  (`assets/images/hero-video-poster.jpg`) extracted from frame 0 for
+  before it loads and for `prefers-reduced-motion` (which never
+  autoplays it at all).

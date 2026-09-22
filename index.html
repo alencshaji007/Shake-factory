@@ -41,12 +41,24 @@
   <!-- ============ HERO / OPENING SCENE ============ -->
   <section class="hero" id="hero">
     <div class="hero__bg"></div>
+    <!-- Intro video: real footage the site owner supplied, plays once on
+         load; the "Shake Factory" title reveals right as it ends (see
+         js/main.js). Falls back to the tumble animation if it can't play. -->
+    <video class="hero__video" data-hero-video muted playsinline preload="auto" poster="assets/images/hero-video-poster.jpg" aria-hidden="true">
+      <source src="assets/video/hero-intro.webm" type="video/webm" />
+      <source src="assets/video/hero-intro.mp4" type="video/mp4" />
+    </video>
     <div class="hero__vignette"></div>
     <div class="hero__grain"></div>
     <!-- Real WebGL 3D background: procedurally-modelled coffee beans and
          pistachios drifting behind the scene (js/hero3d.js). Degrades to
          nothing if WebGL is unavailable. -->
     <canvas class="hero__3d" data-hero-3d aria-hidden="true"></canvas>
+    <!-- Darkens the area behind the title just enough to keep it readable
+         over the video, whatever happens to be in frame there — fades in
+         with the title reveal rather than sitting on top of the video the
+         whole time. -->
+    <div class="hero__scrim" data-hero-scrim aria-hidden="true"></div>
 
     <div class="hero__stage" data-hero-stage>
       <!-- Phase 1: strawberries tumble through frame -->
