@@ -362,14 +362,41 @@
      ========================================================= */
   gsap.utils.toArray(".shake-card").forEach(function (card) {
     var img = card.querySelector("[data-tilt-img]");
+    var splash = card.querySelector("[data-card-splash]");
     if (!img) return;
 
-    gsap.fromTo(card, { opacity: 0, y: 60 }, {
-      opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
+    if (reduceMotion) {
+      gsap.fromTo(card, { opacity: 0, y: 60 }, {
+        opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
+        scrollTrigger: { trigger: card, start: "top 88%", toggleActions: "play none none reverse" },
+      });
+      return;
+    }
+
+    // the card tips up into place with real perspective depth — like it's
+    // being set down rather than just fading in — and a milk-splash burst
+    // hits right as it lands, then clears
+    var splashRotate = gsap.utils.random(-18, 18);
+    var entrance = gsap.timeline({
       scrollTrigger: { trigger: card, start: "top 88%", toggleActions: "play none none reverse" },
     });
-
-    if (reduceMotion) return;
+    entrance.fromTo(card,
+      { opacity: 0, y: 70, rotateX: -22, scale: 0.94 },
+      {
+        opacity: 1, y: 0, rotateX: 0, scale: 1, duration: 0.9, ease: "power3.out",
+        transformPerspective: 900, transformOrigin: "50% 100%",
+      },
+      0
+    );
+    if (splash) {
+      entrance
+        .fromTo(splash,
+          { opacity: 0, scale: 0.35, rotate: splashRotate },
+          { opacity: 0.9, scale: 1.15, rotate: splashRotate, duration: 0.45, ease: "power2.out" },
+          0.12
+        )
+        .to(splash, { opacity: 0, scale: 1.4, duration: 0.55, ease: "power1.in" }, 0.5);
+    }
 
     var bounds;
     card.addEventListener("pointerenter", function () {

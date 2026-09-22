@@ -422,6 +422,18 @@ section{ position:relative; }
   will-change:transform;
   transition:transform .1s linear;
 }
+/* the milk-splash burst that plays once as each card scrolls into view —
+   sized/centred independently of the cover-fit product photo above it,
+   via margin:auto centering so `transform` is left free for GSAP to
+   animate scale/rotate without fighting a CSS transform for position */
+.shake-card__media img.shake-card__splash{
+  width:80%; height:80%;
+  object-fit:contain;
+  margin:auto;
+  opacity:0;
+  pointer-events:none;
+  transition:none;
+}
 .shake-card__row{
   display:flex; align-items:baseline; justify-content:space-between; gap:.8rem;
   margin-bottom:.5rem;
