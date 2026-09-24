@@ -347,12 +347,24 @@
     var img = card.querySelector("[data-tilt-img]");
     if (!img) return;
 
-    gsap.fromTo(card, { opacity: 0, y: 60 }, {
-      opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
-      scrollTrigger: { trigger: card, start: "top 88%", toggleActions: "play none none reverse" },
-    });
+    if (reduceMotion) {
+      gsap.fromTo(card, { opacity: 0, y: 60 }, {
+        opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
+        scrollTrigger: { trigger: card, start: "top 88%", toggleActions: "play none none reverse" },
+      });
+      return;
+    }
 
-    if (reduceMotion) return;
+    // the card tips up into place with real perspective depth — like it's
+    // being set down on the counter — instead of just fading in
+    gsap.fromTo(card,
+      { opacity: 0, y: 70, rotateX: -22, scale: 0.94 },
+      {
+        opacity: 1, y: 0, rotateX: 0, scale: 1, duration: 0.9, ease: "power3.out",
+        transformPerspective: 900, transformOrigin: "50% 100%",
+        scrollTrigger: { trigger: card, start: "top 88%", toggleActions: "play none none reverse" },
+      }
+    );
 
     var bounds;
     card.addEventListener("pointerenter", function () {

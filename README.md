@@ -93,10 +93,13 @@ scripts/generate_svg_assets.py    → regenerates every SVG illustration
    (Strawberry Cloud, Choco Overload, Chocolate Mocha), three are still
    shake illustrations (Pistachio Dream, Mango Blast, Nutty Caramel —
    no matching real photo exists yet) with a glass-highlight/lighting
-   pass to read less flat next to the photos. Cards actually lift on
-   hover now (a bug had the GSAP tilt's inline transform silently
-   overriding the CSS hover lift) and the product image parallaxes
-   opposite the cursor, like studio product photography.
+   pass to read less flat next to the photos. Each card tips into place
+   on scroll with a real 3D perspective transform (`rotateX` +
+   `transformPerspective`, anchored at the bottom edge) instead of a flat
+   fade-up. Cards actually lift on hover too (a bug had the GSAP tilt's
+   inline transform silently overriding the CSS hover lift) and the
+   product image parallaxes opposite the cursor, like studio product
+   photography. `prefers-reduced-motion` keeps the plain fade-up, no tilt.
 5. **Showcase** — "Shot, not rendered": three real photographed
    milkshake/dessert shots in a framed gallery strip, proving the site's
    authenticity claim with actual photography.
