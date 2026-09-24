@@ -150,8 +150,7 @@
     var scrim = heroEls.scrim;
 
     // The eyebrow/title/sub/3D-bean reveal — the "Shake Factory" landing
-    // moment. Shared by both paths below so it always looks the same
-    // regardless of what triggered it.
+    // moment.
     function revealCopy() {
       var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
       if (canvas3d) tl.to(canvas3d, { opacity: 0.75, duration: 1.6, ease: "power1.out" }, 0);
@@ -171,58 +170,42 @@
         .to(scrollcue, { opacity: 1, duration: 0.6 }, 0.6);
     }
 
-    // Fallback for when there's no video (or it can't play): the original
-    // tumble-then-reveal sequence.
-    function playTumbleFallback() {
-      gsap.timeline({ defaults: { ease: "power3.out" } })
-        .to(tumbleItems, {
-          opacity: 1,
-          scale: 1,
-          x: 0,
-          y: 0,
-          rotate: function () { return gsap.utils.random(-20, 20); },
-          filter: "blur(0px)",
-          duration: 1,
-          stagger: { each: 0.07, from: "random" },
-        }, 0.1)
-        .to(tumbleItems, {
-          y: "+=26",
-          rotate: "+=14",
-          duration: 1.1,
-          ease: "sine.inOut",
-          stagger: { each: 0.04, from: "random" },
-        }, "-=0.3")
-        .to(tumbleItems, {
-          opacity: 0.14,
-          scale: 0.8,
-          y: "+=20",
-          filter: "blur(2px)",
-          duration: 0.6,
-          stagger: { each: 0.02, from: "center" },
-        }, "-=0.55")
-        .add(revealCopy, "-=0.55");
-    }
+    // The tumble-then-reveal sequence runs on its own timing, independent
+    // of the background video — the title isn't gated behind the video
+    // finishing.
+    gsap.timeline({ defaults: { ease: "power3.out" } })
+      .to(tumbleItems, {
+        opacity: 1,
+        scale: 1,
+        x: 0,
+        y: 0,
+        rotate: function () { return gsap.utils.random(-20, 20); },
+        filter: "blur(0px)",
+        duration: 1,
+        stagger: { each: 0.07, from: "random" },
+      }, 0.1)
+      .to(tumbleItems, {
+        y: "+=26",
+        rotate: "+=14",
+        duration: 1.1,
+        ease: "sine.inOut",
+        stagger: { each: 0.04, from: "random" },
+      }, "-=0.3")
+      .to(tumbleItems, {
+        opacity: 0.14,
+        scale: 0.8,
+        y: "+=20",
+        filter: "blur(2px)",
+        duration: 0.6,
+        stagger: { each: 0.02, from: "center" },
+      }, "-=0.55")
+      .add(revealCopy, "-=0.55");
 
+    // The video just plays quietly in the background, muted and on its
+    // own — no longer tied to the title's timing.
     if (video) {
-      // The video is the intro now — it plays once, real footage the site
-      // owner supplied, and "Shake Factory" lands right as it ends. The
-      // tumbling strawberries stay hidden in this path (video already
-      // shows real fruit flying into frame, no need to repeat that beat).
-      var revealed = false;
-      function reveal() {
-        if (revealed) return;
-        revealed = true;
-        revealCopy();
-      }
-      video.addEventListener("ended", reveal);
-      // never leave the title stuck hidden if the video can't play for
-      // some reason (autoplay blocked, slow network, decode error, ...)
-      video.addEventListener("error", reveal);
-      setTimeout(reveal, 11000);
       var playPromise = video.play();
-      if (playPromise && playPromise.catch) playPromise.catch(reveal);
-    } else {
-      playTumbleFallback();
+      if (playPromise && playPromise.catch) playPromise.catch(function () {});
     }
 
     /* Scroll-out: as the user leaves the hero, push the copy away with

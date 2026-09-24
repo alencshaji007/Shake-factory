@@ -69,21 +69,19 @@ scripts/generate_svg_assets.py    → regenerates every SVG illustration
 
 ## Sections
 
-1. **Hero** — opens on a real video (`assets/video/hero-intro.mp4`/`.webm`,
-   supplied by the site owner): ingredients flying together, pouring into
-   a blender, and the finished shake splashing up, playing once, full-bleed,
-   muted/autoplaying. Right as it ends, the "Shake Factory" title pulls
-   into focus (blur → sharp, a slight overshoot scale, each word rising
-   out of its own reveal mask) as a large single centered line with a
-   solid 3D-extruded text style, over a scrim that fades in with it so
-   the text stays readable whatever's in frame behind it. A real WebGL
+1. **Hero** — a real video (`assets/video/hero-intro.mp4`/`.webm`, supplied
+   by the site owner: ingredients flying together, pouring into a blender,
+   the finished shake splashing up) plays once, full-bleed, muted/autoplaying,
+   as a background layer. Real-photo strawberries tumble through frame and
+   settle back on their own ~2s timing, independent of the video, then the
+   "Shake Factory" title pulls into focus (blur → sharp, a slight overshoot
+   scale, each word rising out of its own reveal mask) as a large single
+   centered line with a solid 3D-extruded text style, over a scrim that
+   fades in with it so the text stays readable over the video. A real WebGL
    3D field of procedurally-modelled coffee beans and pistachios
    (`js/hero3d.js`) fades up at the same time, blurred and dimmed so it
-   reads as atmosphere. If the video can't play (autoplay blocked, a
-   decode error, or a safety timeout), it falls back to the original
-   tumble-then-reveal animation — strawberries tumble through frame and
-   settle back — so the title always lands one way or another. Scrolling
-   out parallaxes/blurs/fades the whole stage like a camera pull-back.
+   reads as atmosphere. Scrolling out parallaxes/blurs/fades the whole
+   stage like a camera pull-back.
 2. **Ingredients** — a pinned, scroll-scrubbed depth scene: three layers of
    real ingredient photos + a couple of illustrations move at different
    speeds/rotations to simulate 3D depth without any fake 3D models, and
